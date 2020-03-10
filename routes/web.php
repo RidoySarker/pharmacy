@@ -22,5 +22,9 @@ Route::get('/', function () {
 });
 
 
+Route::get('/hello',function(){
+	return "Hello";
+});
+
 Route::get('/admin', 'AdminController@index');
 Route::get('/home', 'HomeController@index');
