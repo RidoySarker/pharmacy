@@ -14,7 +14,7 @@ class CatagoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('Admin.medicine.category');
     }
 
     /**
