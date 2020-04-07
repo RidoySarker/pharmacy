@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Catagory;
 use Illuminate\Http\Request;
+use Toastr;
+use Validator;
 
 class CatagoryController extends Controller
 {
@@ -14,7 +16,8 @@ class CatagoryController extends Controller
      */
     public function index()
     {
-        //
+        $category = Catagory::orderBy('catagory_id', 'desc')->get();
+        return view('Admin.medicine.category.category', ['category' => $category] );
     }
 
     /**
@@ -24,7 +27,7 @@ class CatagoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.medicine.category.add_Modal');
     }
 
     /**
@@ -35,7 +38,22 @@ class CatagoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'catagory_name'        => 'required',
+            'catagory_description' => 'required',
+            'catagory_status'      => 'required',
+        ]);
+        $data = [
+            'catagory_name'        => $request->catagory_name,
+            'catagory_description' => $request->catagory_description,
+            'catagory_status'      => $request->catagory_status,
+        ];
+        Catagory::create($data);
+        $response = [
+            'msgtype' => 'success',
+            'message' => 'Data Inserted Successfully',
+        ];
+        echo json_encode($response);
     }
 
     /**
@@ -55,9 +73,10 @@ class CatagoryController extends Controller
      * @param  \App\Catagory  $catagory
      * @return \Illuminate\Http\Response
      */
-    public function edit(Catagory $catagory)
+    public function edit($id)
     {
-        //
+        $catagory = Catagory::findOrFail($id);
+        return view('Admin.medicine.category.edit_Modal', ['catagory' => $catagory]);
     }
 
     /**
@@ -67,9 +86,25 @@ class CatagoryController extends Controller
      * @param  \App\Catagory  $catagory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Catagory $catagory)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'catagory_name'        => 'required',
+            'catagory_description' => 'required',
+            'catagory_status'      => 'required',
+        ]);
+        $data = [
+            'catagory_name'        => $request->catagory_name,
+            'catagory_description' => $request->catagory_description,
+            'catagory_status'      => $request->catagory_status,
+        ];
+        $id = $request->catagory_id;
+        Catagory::where('catagory_id', $id)->update($data);
+        $response = [
+            'msgtype' => 'success',
+            'message' => 'Data Updated Successfully',
+        ];
+        echo json_encode($response);
     }
 
     /**
@@ -78,8 +113,13 @@ class CatagoryController extends Controller
      * @param  \App\Catagory  $catagory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Catagory $catagory)
+    public function destroy($id)
     {
-        //
+        Catagory::where('catagory_id', $id)->delete();
+        $response = [
+            'msgtype' => 'success',
+            'message' => 'Data Deleted Successfully',
+        ];
+        echo json_encode($response);
     }
 }
