@@ -1,6 +1,4 @@
-  <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
@@ -13,7 +11,6 @@
       </li>
     </ul>
 
-    <!-- SEARCH FORM -->
     <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
@@ -25,9 +22,8 @@
       </div>
     </form>
 
-    <!-- Right navbar links -->
+
     <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
 
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -36,7 +32,6 @@
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <a href="#" class="dropdown-item">
-            <!-- Message Start -->
             <div class="media">
               <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
@@ -48,7 +43,6 @@
                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
               </div>
             </div>
-            <!-- Message End -->
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
@@ -64,7 +58,6 @@
                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
               </div>
             </div>
-            <!-- Message End -->
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
@@ -80,7 +73,6 @@
                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
               </div>
             </div>
-            <!-- Message End -->
           </a>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
@@ -112,27 +104,27 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
-      <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
             <a href="" class="dropdown-toggle user-panel " data-toggle="dropdown">
-              <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
-              <span class="hidden-xs">Name</span>
+              <img src="{{Auth::user()->image==''? '/images/blankavatar.png' : '/'.Auth::user()->image}}" class="img-circle" alt="User Image">
+              <span class="hidden-xs">{{Auth::user()->name}}</span>
             </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <div class="card card-widget widget-user">
               <div class="widget-user-header bg-info">
-                <h3 class="widget-user-username">Welcome </h3>
+                <h3 class="widget-user-username">Welcome {{Auth::user()->name}}</h3>
                 <h5 class="widget-user-desc">Founder &amp; CEO</h5>
               </div>
               <div class="widget-user-image">
-                <img class="img-circle elevation-2" src="../dist/img/user1-128x128.jpg" alt="User Avatar">
+                <img class="img-circle elevation-2" src="{{Auth::user()->image==''? '/images/blankavatar.png' : '/'.Auth::user()->image}}" alt="User Avatar">
               </div>
               </div>
           <a href="{{url('profile')}}" class="btn btn-info btn-flat" style="margin-top: 62px;">Profile</a>
-              <form method="post" action="{{route('logout')}}">
-                    @csrf
-                    <button class="btn btn-info btn-flat float-right" style="margin-top: -38px;">Sign out</button>
-                  </form>
+          <a href="{{url('password')}}" class="btn btn-info btn-flat" style="margin-top: 62px;margin-left: 18px;">Password</a>
+              <form method="post" action="{{route('logout')}}"> 
+                @csrf
+                <button class="btn btn-info btn-flat float-right" style="margin-top: -38px;">Sign out</button>
+              </form>
         </div>
       </li>
     </ul>

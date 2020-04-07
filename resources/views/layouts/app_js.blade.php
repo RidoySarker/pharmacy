@@ -43,5 +43,6 @@ $.ajaxSetup({
 });
 </script>
 @yield('script')
+{!! Toastr::message() !!}
 </body>
 </html>
