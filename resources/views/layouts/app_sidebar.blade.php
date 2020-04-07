@@ -5,9 +5,8 @@
       <span class="brand-text font-weight-light">PMS</span>
     </a>
 
-    <!-- Sidebar -->
+
     <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
@@ -27,6 +26,7 @@
               </p>
             </a>
           </li>
+
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -94,6 +94,7 @@
             </ul>
           </li>
 
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tree"></i>
@@ -152,6 +153,7 @@
             </ul>
           </li>
 
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
@@ -182,6 +184,7 @@
             </ul>
           </li>
 
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
@@ -207,8 +210,6 @@
           </li>
         </ul>
       </nav>
-      <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
   </aside>
   <div class="content-wrapper">

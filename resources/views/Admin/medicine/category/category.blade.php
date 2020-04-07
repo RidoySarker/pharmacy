@@ -43,7 +43,7 @@
                       <span style="color: green;">{{ $value->catagory_status }}</span>
                       @else
                       <span style="color: red;">{{ $value->catagory_status }}</span>
-                      @endif
+                      @endif 
                     </td>
                     <td>
                       <button class="edit btn btn-outline-primary btn-xs" data="{{ $value->catagory_id }}"><i class="fa fa-edit"></i></button>
