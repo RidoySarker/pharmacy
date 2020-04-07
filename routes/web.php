@@ -36,3 +36,7 @@ Route::post('password/create', 'PasswordController@create');
 Route::resource('company', 'CompanyController');
 Route::post('company/store', 'CompanyController@store');
 Route::post('company/update', 'CompanyController@update');
+
+Route::resource('desk', 'DeskController');
+Route::post('desk/store', 'DeskController@store');
+Route::post('desk/update', 'DeskController@update');

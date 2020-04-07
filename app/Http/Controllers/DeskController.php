@@ -14,7 +14,8 @@ class DeskController extends Controller
      */
     public function index()
     {
-        //
+        $desk = Desk::orderBy('desk_id', 'desc')->get();
+        return view('Admin.medicine.desk.desk', ['desk' => $desk]);
     }
 
     /**
@@ -24,7 +25,7 @@ class DeskController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.medicine.desk.add_Modal');
     }
 
     /**
@@ -35,7 +36,22 @@ class DeskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'desk_name'        => 'required',
+            'desk_code'        => 'required',
+            'desk_description' => 'required',
+        ]);
+        $data = [
+            'desk_name'        => $request->desk_name,
+            'desk_code'        => $request->desk_code,
+            'desk_description' => $request->desk_description,
+        ];
+        Desk::create($data);
+        $response = [
+            'msgtype' => 'success',
+            'message' => 'Data Inserted Successfully',
+        ];
+        echo json_encode($response);
     }
 
     /**
@@ -55,9 +71,10 @@ class DeskController extends Controller
      * @param  \App\Desk  $desk
      * @return \Illuminate\Http\Response
      */
-    public function edit(Desk $desk)
+    public function edit($id)
     {
-        //
+        $desk = Desk::findOrFail($id);
+        return view('Admin.medicine.desk.edit_Modal', ['desk' => $desk]);
     }
 
     /**
@@ -67,9 +84,25 @@ class DeskController extends Controller
      * @param  \App\Desk  $desk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Desk $desk)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'desk_name'        => 'required',
+            'desk_code'        => 'required',
+            'desk_description' => 'required',
+        ]);
+        $data = [
+            'desk_name'        => $request->desk_name,
+            'desk_code'        => $request->desk_code,
+            'desk_description' => $request->desk_description,
+        ];
+        $id = $request->desk_id;
+        Desk::where('desk_id', $id)->update($data);
+        $response = [
+            'msgtype' => 'success',
+            'message' => 'Data Updated Successfully',
+        ];
+        echo json_encode($response);
     }
 
     /**
@@ -78,8 +111,13 @@ class DeskController extends Controller
      * @param  \App\Desk  $desk
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Desk $desk)
+    public function destroy($id)
     {
-        //
+        Desk::where('desk_id', $id)->delete();
+        $response = [
+            'msgtype' => 'success',
+            'message' => 'Data Deleted Successfully',
+        ];
+        echo json_encode($response);
     }
 }

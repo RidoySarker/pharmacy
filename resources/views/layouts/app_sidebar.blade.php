@@ -50,7 +50,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
+                <a href="{{ url('desk') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Desk Management</p>
                 </a>
