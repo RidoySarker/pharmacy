@@ -28,3 +28,8 @@ Route::get('/hello',function(){
 
 Route::get('/admin', 'AdminController@index');
 Route::get('/home', 'HomeController@index');
+Route::resource('/profile', 'UserController');
+
+Route::resource('password', 'PasswordController');
+Route::post('password/store', 'PasswordController@store');
+Route::post('password/create', 'PasswordController@create');

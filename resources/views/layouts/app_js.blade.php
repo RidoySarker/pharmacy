@@ -32,7 +32,15 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
 <script src="{{asset('js/sweetalert.min.js')}}"></script>
-
+<script type="text/javascript" src="toastr.min.js"></script>
+<script type="text/javascript">
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+</script>
 @yield('script')
+ {!! Toastr::message() !!}
 </body>
 </html>
