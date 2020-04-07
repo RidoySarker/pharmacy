@@ -21,14 +21,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/hi',function(){
-	return "how r u";
-});
-
-Route::get('/hello',function(){
-	return "Hello";
-});
-
 Route::get('/admin', 'AdminController@index');
+
 Route::get('/home', 'HomeController@index');
+
 Route::resource('catagory', 'CatagoryController');
+Route::post('catagory/store', 'CatagoryController@store');
+Route::post('catagory/update', 'CatagoryController@update');
