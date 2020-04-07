@@ -1,4 +1,4 @@
-  <!-- Navbar -->
+ <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -115,21 +115,23 @@
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
             <a href="" class="dropdown-toggle user-panel " data-toggle="dropdown">
-              <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
-              <span class="hidden-xs">Name</span>
+              <img src="{{Auth::user()->image==''? '/images/blankavatar.png' : '/'.Auth::user()->image}}" class="img-circle" alt="User Image">
+              <span class="hidden-xs">{{Auth::user()->name}}</span>
             </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <div class="card card-widget widget-user">
               <div class="widget-user-header bg-info">
-                <h3 class="widget-user-username">Welcome </h3>
+                <h3 class="widget-user-username">Welcome {{Auth::user()->name}}</h3>
                 <h5 class="widget-user-desc">Founder &amp; CEO</h5>
               </div>
               <div class="widget-user-image">
-                <img class="img-circle elevation-2" src="../dist/img/user1-128x128.jpg" alt="User Avatar">
+                <img class="img-circle elevation-2" src="{{Auth::user()->image==''? '/images/blankavatar.png' : '/'.Auth::user()->image}}" alt="User Avatar">
               </div>
               </div>
           <a href="{{url('profile')}}" class="btn btn-info btn-flat" style="margin-top: 62px;">Profile</a>
               <form method="post" action="{{route('logout')}}">
+                    <a href="{{url('password')}}" class="btn btn-info btn-flat" style="margin-top: 62px;margin-left: 18px;">Password</a>
+              <form method="post" action="{{route('logout')}}"> 
                     @csrf
                     <button class="btn btn-info btn-flat float-right" style="margin-top: -38px;">Sign out</button>
                   </form>

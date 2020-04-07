@@ -28,3 +28,7 @@ Route::get('/home', 'HomeController@index');
 Route::resource('catagory', 'CatagoryController');
 Route::post('catagory/store', 'CatagoryController@store');
 Route::post('catagory/update', 'CatagoryController@update');
+Route::resource('/profile', 'UserController');
+Route::resource('password', 'PasswordController');
+Route::post('password/store', 'PasswordController@store');
+Route::post('password/create', 'PasswordController@create');

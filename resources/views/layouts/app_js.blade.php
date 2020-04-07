@@ -35,6 +35,7 @@ $(function () {
   });
 });
 </script>
+<script type="text/javascript" src="toastr.min.js"></script>
 <script type="text/javascript">
 $.ajaxSetup({
     headers: {
@@ -43,5 +44,6 @@ $.ajaxSetup({
 });
 </script>
 @yield('script')
+ {!! Toastr::message() !!}
 </body>
 </html>
