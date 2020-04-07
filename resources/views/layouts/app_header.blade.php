@@ -120,11 +120,20 @@
               </div>
               </div>
           <a href="{{url('profile')}}" class="btn btn-info btn-flat" style="margin-top: 62px;">Profile</a>
+<<<<<<< HEAD
           <a href="{{url('password')}}" class="btn btn-info btn-flat" style="margin-top: 62px;margin-left: 18px;">Password</a>
               <form method="post" action="{{route('logout')}}"> 
                 @csrf
                 <button class="btn btn-info btn-flat float-right" style="margin-top: -38px;">Sign out</button>
               </form>
+=======
+              <form method="post" action="{{route('logout')}}">
+                    <a href="{{url('password')}}" class="btn btn-info btn-flat" style="margin-top: 62px;margin-left: 18px;">Password</a>
+              <form method="post" action="{{route('logout')}}"> 
+                    @csrf
+                    <button class="btn btn-info btn-flat float-right" style="margin-top: -38px;">Sign out</button>
+                  </form>
+>>>>>>> 5710aac8e93912818f082e2031c56015e65ab24b
         </div>
       </li>
     </ul>

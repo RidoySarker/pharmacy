@@ -35,6 +35,7 @@ $(function () {
   });
 });
 </script>
+<script type="text/javascript" src="toastr.min.js"></script>
 <script type="text/javascript">
 $.ajaxSetup({
     headers: {
