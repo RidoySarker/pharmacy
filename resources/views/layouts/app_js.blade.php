@@ -44,6 +44,6 @@ $.ajaxSetup({
 });
 </script>
 @yield('script')
- {!! Toastr::message() !!}
+{!! Toastr::message() !!}
 </body>
 </html>
