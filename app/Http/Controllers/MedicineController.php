@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Medicine;
+use App\Desk;
+use App\Catagory;
+use App\Company;
 use Illuminate\Http\Request;
 
 class MedicineController extends Controller
@@ -14,7 +17,8 @@ class MedicineController extends Controller
      */
     public function index()
     {
-        //
+        $medicine = Medicine::orderBy('medicine_id', 'desc')->get();
+        return view('Admin.medicine.medicine.medicine', ['medicine' => $medicine]);
     }
 
     /**
@@ -24,7 +28,10 @@ class MedicineController extends Controller
      */
     public function create()
     {
-        //
+        $desk = Desk::get();
+        $catagory = Catagory::where('catagory_status', 'Active')->get();
+        $company = Company::where('company_status', 'Active')->get();
+        return view('Admin.medicine.medicine.add_Modal', ['desk' => $desk, 'catagory' => $catagory, 'company' => $company]);
     }
 
     /**
@@ -35,7 +42,36 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'medicine_code'        => 'required',
+            'medicine_name'        => 'required',
+            'catagory'             => 'required',
+            'company_name'         => 'required',
+            'desk_name'            => 'required',
+            'purcase_price'        => 'required',
+            'retail_price'         => 'required',
+            'whole_sell_price'     => 'required',
+            'medicine_description' => 'required',
+            'medicine_status'      => 'required',
+        ]);
+        $data = [
+            'medicine_code'        => $request->medicine_code,
+            'medicine_name'        => $request->medicine_name,
+            'catagory'             => $request->catagory,
+            'company_name'         => $request->company_name,
+            'desk_name'            => $request->desk_name,
+            'purcase_price'        => $request->purcase_price,
+            'retail_price'         => $request->retail_price,
+            'whole_sell_price'     => $request->whole_sell_price,
+            'medicine_description' => $request->medicine_description,
+            'medicine_status'      => $request->medicine_status,
+        ];
+        Medicine::create($data);
+        $response = [
+            'msgtype' => 'success',
+            'message' => 'Data Inserted Successfully',
+        ];
+        echo json_encode($response);
     }
 
     /**
@@ -55,9 +91,13 @@ class MedicineController extends Controller
      * @param  \App\Medicine  $medicine
      * @return \Illuminate\Http\Response
      */
-    public function edit(Medicine $medicine)
+    public function edit($id)
     {
-        //
+        $medicine = Medicine::findOrFail($id);
+        $desk = Desk::get();
+        $catagory = Catagory::where('catagory_status', 'Active')->get();
+        $company = Company::where('company_status', 'Active')->get();
+        return view('Admin.medicine.medicine.edit_Modal', ['medicine' => $medicine, 'desk' => $desk, 'catagory' => $catagory, 'company' => $company]);
     }
 
     /**
@@ -67,9 +107,39 @@ class MedicineController extends Controller
      * @param  \App\Medicine  $medicine
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Medicine $medicine)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'medicine_code'        => 'required',
+            'medicine_name'        => 'required',
+            'catagory'             => 'required',
+            'company_name'         => 'required',
+            'desk_name'            => 'required',
+            'purcase_price'        => 'required',
+            'retail_price'         => 'required',
+            'whole_sell_price'     => 'required',
+            'medicine_description' => 'required',
+            'medicine_status'      => 'required',
+        ]);
+        $data = [
+            'medicine_code'        => $request->medicine_code,
+            'medicine_name'        => $request->medicine_name,
+            'catagory'             => $request->catagory,
+            'company_name'         => $request->company_name,
+            'desk_name'            => $request->desk_name,
+            'purcase_price'        => $request->purcase_price,
+            'retail_price'         => $request->retail_price,
+            'whole_sell_price'     => $request->whole_sell_price,
+            'medicine_description' => $request->medicine_description,
+            'medicine_status'      => $request->medicine_status,
+        ];
+        $id = $request->medicine_id;
+        Medicine::where('medicine_id', $id)->update($data);
+        $response = [
+            'msgtype' => 'success',
+            'message' => 'Data Updated Successfully',
+        ];
+        echo json_encode($response);
     }
 
     /**
@@ -78,8 +148,13 @@ class MedicineController extends Controller
      * @param  \App\Medicine  $medicine
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Medicine $medicine)
+    public function destroy($id)
     {
-        //
+        Medicine::where('medicine_id', $id)->delete();
+        $response = [
+            'msgtype' => 'success',
+            'message' => 'Data Deleted Successfully',
+        ];
+        echo json_encode($response);
     }
 }

@@ -40,3 +40,7 @@ Route::post('company/update', 'CompanyController@update');
 Route::resource('desk', 'DeskController');
 Route::post('desk/store', 'DeskController@store');
 Route::post('desk/update', 'DeskController@update');
+
+Route::resource('medicine', 'MedicineController');
+Route::post('medicine/store', 'MedicineController@store');
+Route::post('medicine/update', 'MedicineController@update');

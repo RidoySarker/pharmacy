@@ -79,7 +79,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="myModalLabel">Add Category</h5>
+        <h5 class="modal-title" id="myModalLabel">Add Company</h5>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       </div>
 
@@ -93,7 +93,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="myModalLabel">Edit Category</h5>
+        <h5 class="modal-title" id="myModalLabel">Edit Company</h5>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       </div>
 
