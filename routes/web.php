@@ -44,3 +44,16 @@ Route::post('desk/update', 'DeskController@update');
 Route::resource('medicine', 'MedicineController');
 Route::post('medicine/store', 'MedicineController@store');
 Route::post('medicine/update', 'MedicineController@update');
+
+Route::resource('/customer', 'CustomerController');
+Route::post('/customer/store', 'CustomerController@store');
+Route::post('/customer/update', 'CustomerController@update');
+
+Route::resource('/expense_catagory', 'ExpenseController');
+Route::post('/expense_catagory/store', 'ExpenseController@store');
+Route::post('/expense_catagory/update', 'ExpenseController@update');
+
+Route::resource('/expense_for', 'ExpenseForController');
+Route::post('/expense_for/store', 'ExpenseForController@store');
+Route::post('/expense_for/update', 'ExpenseForController@update');
+

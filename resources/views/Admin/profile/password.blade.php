@@ -58,5 +58,5 @@
     </div>
 </section>
 @endsection @section('script')
-<script src="ajax/password.js"></script>
+<script src="custom_js/password.js"></script>
 @endsection
