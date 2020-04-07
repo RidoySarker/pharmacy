@@ -32,3 +32,7 @@ Route::resource('/profile', 'UserController');
 Route::resource('password', 'PasswordController');
 Route::post('password/store', 'PasswordController@store');
 Route::post('password/create', 'PasswordController@create');
+
+Route::resource('company', 'CompanyController');
+Route::post('company/store', 'CompanyController@store');
+Route::post('company/update', 'CompanyController@update');

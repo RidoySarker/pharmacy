@@ -14,7 +14,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        $company = Company::orderBy('company_id', 'desc')->get();
+        return view('Admin.medicine.company.company', ['company' => $company]);
     }
 
     /**
@@ -24,7 +25,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.medicine.company.add_Modal');
     }
 
     /**
@@ -35,7 +36,26 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'company_name'    => 'required',
+            'company_phone'   => 'required',
+            'company_email'   => 'required',
+            'company_address' => 'required',
+            'company_status'  => 'required',
+        ]);
+        $data = [
+            'company_name'    => $request->company_name,
+            'company_phone'   => $request->company_phone,
+            'company_email'   => $request->company_email,
+            'company_address' => $request->company_address,
+            'company_status'  => $request->company_status,
+        ];
+        Company::create($data);
+        $response = [
+            'msgtype' => 'success',
+            'message' => 'Data Inserted Successfully',
+        ];
+        echo json_encode($response);
     }
 
     /**
@@ -55,9 +75,10 @@ class CompanyController extends Controller
      * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function edit(Company $company)
+    public function edit($id)
     {
-        //
+        $company = Company::findOrFail($id);
+        return view('Admin.medicine.company.edit_Modal', ['company' => $company]);
     }
 
     /**
@@ -67,9 +88,29 @@ class CompanyController extends Controller
      * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $company)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+            'company_name'    => 'required',
+            'company_phone'   => 'required',
+            'company_email'   => 'required',
+            'company_address' => 'required',
+            'company_status'  => 'required',
+        ]);
+        $data = [
+            'company_name'    => $request->company_name,
+            'company_phone'   => $request->company_phone,
+            'company_email'   => $request->company_email,
+            'company_address' => $request->company_address,
+            'company_status'  => $request->company_status,
+        ];
+        $id = $request->company_id;
+        Company::where('company_id', $id)->update($data);
+        $response = [
+            'msgtype' => 'success',
+            'message' => 'Data Updated Successfully',
+        ];
+        echo json_encode($response);
     }
 
     /**
@@ -78,8 +119,13 @@ class CompanyController extends Controller
      * @param  \App\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function destroy($id)
     {
-        //
+        Company::where('company_id', $id)->delete();
+        $response = [
+            'msgtype' => 'success',
+            'message' => 'Data Deleted Successfully',
+        ];
+        echo json_encode($response);
     }
 }

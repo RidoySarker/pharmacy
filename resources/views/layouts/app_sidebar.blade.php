@@ -30,7 +30,7 @@
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+              <i class="nav-icon fas fa-medkit" aria-hidden="true"></i>
               <p>
                 Medicine
                 <i class="right fas fa-angle-left"></i>
@@ -38,7 +38,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="{{ url('company') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Brand/Company</p>
                 </a>
