@@ -65,21 +65,21 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
+                <a href="{{ url('purcase') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Purcase</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
+                <a href="{{ route('purcase.create') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Purcase Report</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
+                <a href="{{ url('rest_report') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Due Report</p>
+                  <p>Rest Report</p>
                 </a>
               </li>
             </ul>

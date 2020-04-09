@@ -17,7 +17,6 @@
 <script src="{{asset('dist/js/adminlte.js')}}"></script>
 <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
 <script src="{{asset('dist/js/demo.js')}}"></script>
-<script src="{{asset('js/sweetalert.min.js')}}"></script>
 <script src="{{asset('plugins/datatables/jquery.dataTables.js')}}"></script>
 <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
 <script src="{{asset('toastr/toastr.min.js')}}"></script>
@@ -35,7 +34,6 @@ $(function () {
   });
 });
 </script>
-<script type="text/javascript" src="toastr.min.js"></script>
 <script type="text/javascript">
 $.ajaxSetup({
     headers: {
