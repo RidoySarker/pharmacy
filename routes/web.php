@@ -57,3 +57,9 @@ Route::resource('/expense_for', 'ExpenseForController');
 Route::post('/expense_for/store', 'ExpenseForController@store');
 Route::post('/expense_for/update', 'ExpenseForController@update');
 
+Route::resource('purcase', 'PurcaseController');
+Route::get('medicine_name/{company}', 'PurcaseController@medicine_name');
+Route::get('medicine_list/{medicine}', 'PurcaseController@medicine_list');
+Route::post('purcase/store', 'PurcaseController@store');
+Route::post('purcase/update', 'PurcaseController@update');
+Route::get('/rest_report', 'PurcaseController@rest_report');
