@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Dashboard @endsection
+@section('title') PMS Dashboard @endsection
 @section('content')
 
     <!-- Content Header (Page header) -->
@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item active">Dashboard</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -29,14 +29,19 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>150</h3>
+                <h3>
+                  @php
+                  $stock_data = DB::table('stocks')->get();
+                  @endphp
+                  {{collect($stock_data)->sum('total_stock')}}
+                </h3>
 
-                <p>New Orders</p>
+                <p>Total Stock</p>
               </div>
               <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="fas fa-capsules"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/stock_report" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

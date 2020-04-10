@@ -23,7 +23,9 @@ Route::get('/', function () {
 
 Route::get('/admin', 'AdminController@index');
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', function () {
+    return Redirect::to('admin');
+});
 
 Route::resource('catagory', 'CatagoryController');
 Route::post('catagory/store', 'CatagoryController@store');
@@ -63,3 +65,6 @@ Route::get('medicine_list/{medicine}', 'PurcaseController@medicine_list');
 Route::post('purcase/store', 'PurcaseController@store');
 Route::post('purcase/update', 'PurcaseController@update');
 Route::get('/rest_report', 'PurcaseController@rest_report');
+Route::get('stock_report', 'PurcaseController@stock_report');
+Route::get('medicine_report', 'PurcaseController@medicine_data');
+Route::get('medicine_report/{name}', 'PurcaseController@medicine_report');

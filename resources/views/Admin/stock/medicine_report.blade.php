@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('title', 'Purcase Report')
+@section('title', 'Medicne Wise Report')
 @section('content')
 <!DOCTYPE html>
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Purcase Report</h1>
+            <h1>Medicne Wise Report</h1>
           </div>
         </div>
     </section>
@@ -16,7 +16,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Purcase Report List</h3>
+              <h3 class="card-title">Medicne Wise Report List</h3>
             </div>
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
@@ -33,11 +33,16 @@
 	                </tr>
                 </thead>
                 <tbody>
-	              @foreach($purcase as $key => $value)
+	              @foreach($report_data as $key => $value)
 	              <tr>
 	                <td>{{ $value->date }}</td>
 	                <td>{{ $value->company_name }}</td>
-	                <td>{{ $value->medicine_name }}</td>
+	                <td>
+	                	@php
+	                	$medicine_name=DB::table('medicines')->where('medicine_code',$value->medicine_code)->first();
+	                	@endphp
+	                	{{ $medicine_name->medicine_name }}
+	                </td>
 	                <td>{{ $value->quantity }}</td>
 	                <td>{{ $value->grand_total }}</td>
 	                <td>{{ $value->pay }}</td>
@@ -55,18 +60,9 @@
 	              </tr>
 	              @endforeach
                 </tbody>
-                <tfoot>
-	                <tr>
-	                  <th>Date</th>
-	                  <th>Company Name</th>
-	                  <th>Medicine Name</th>
-	                  <th>Quantity</th>
-	                  <th>Total</th>
-	                  <th>Pay</th>
-	                  <th>Rest</th>
-	                  <th>Action</th>
-	                </tr>
-                </tfoot>
+					<td colspan="8" class="text-center" style="font-size: 30px;color: green;">
+						Total Stock : {{$stock_report ? $stock_report->total_stock :'NOT PURCASE YET'}}
+					</td>
               </table>
             </div>
           </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Purcase;
 use App\Company;
 use App\Medicine;
+use App\Stock;
 use Illuminate\Http\Request;
 
 class PurcaseController extends Controller
@@ -61,6 +62,7 @@ class PurcaseController extends Controller
             'pay'           => 'required',
             'rest'          => 'required',
         ]);
+
         $data = [
             'date'          => $request->date,
             'company_name'  => $request->company_name,
@@ -71,6 +73,19 @@ class PurcaseController extends Controller
             'pay'           => $request->pay,
             'rest'          => $request->rest,
         ];
+        $stock=new Stock;
+        $prev_stock=$stock::where('medicine_code',$request->medicine_code)->first();
+            if($prev_stock)
+                {
+                    $total_stock=$prev_stock->total_stock+$request->quantity;
+                    $prev_stock->update(['total_stock'=>$total_stock]);
+                }
+            else
+                {
+                    $stock->medicine_code=$request->medicine_code;
+                    $stock->total_stock=$request->quantity;
+                    $stock->save();
+                }
         Purcase::create($data);
         $response = [
             'msgtype' => 'success',
@@ -85,10 +100,33 @@ class PurcaseController extends Controller
      * @param  \App\Purcase  $purcase
      * @return \Illuminate\Http\Response
      */
+
+    public function stock_report()
+    {
+        
+        $data = Medicine::join('stocks','stocks.medicine_code','=','medicines.medicine_code')->get();
+        return view('Admin.stock.stock_report',['stock_data'=>$data]);
+    }
+
+    public function medicine_data()
+    {
+        $medicine_data = Medicine::get();
+        return view('Admin.stock.medicine_list',['medicine_list'=>$medicine_data]);
+    }
+
+    public function medicine_report($name)
+    {
+        $report_data = Purcase::where('medicine_code',$name)->get();
+        $stock_report = Stock::where('medicine_code',$name)->first();
+        return view('Admin.stock.medicine_report',['report_data'=>$report_data,'stock_report'=>$stock_report]);
+    }
+
+
     public function show(Purcase $purcase)
     {
         //
     }
+
 
     public function rest_report()
     {
@@ -142,4 +180,5 @@ class PurcaseController extends Controller
         ];
         echo json_encode($response);
     }
+
 }
