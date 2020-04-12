@@ -49,8 +49,12 @@
 	                	@endif
 	                </td>
 	                <td>
-	                  <button class="edit btn btn-outline-primary btn-xs" data="{{ $value->purcase_id }}"><i class="fa fa-edit"></i></button>
-	                  <button class="delete btn btn-outline-danger btn-xs" data="{{ $value->purcase_id }}"><i class="fa fa-trash-alt"></i></button>
+	                	@if($value->rest==0)
+	                	<button class="btn btn-success btn-xs">No Rest</button>
+	                	@else
+	                	<button class="edit btn btn-danger btn-xs" data="{{ $value->purcase_id }}">Pay Now</button>
+	                	@endif
+	                  	<button class="delete btn btn-outline-danger btn-xs" data="{{ $value->purcase_id }}"><i class="fa fa-trash-alt"></i></button>
 	                </td>
 	              </tr>
 	              @endforeach

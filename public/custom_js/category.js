@@ -80,7 +80,6 @@ $(document).ready(function() {
   //Delete
   $(document).on("click", ".delete", function() {
     var data = $(this).attr("data");
-    console.log(data);
 
     swal({
       title: "Are you sure?",
