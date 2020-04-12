@@ -13,10 +13,10 @@ class CreateWholeSaleChildrenTable extends Migration
      */
     public function up()
     {
-        Schema::create('whole_sale_children', function (Blueprint $table) {
-            $table->increments('whole_sale_child_id');
+        Schema::create('whole_sale_details', function (Blueprint $table) {
+            $table->increments('whole_sale_detail_id');
             $table->string('date');
-            $table->string('patient_name');
+            $table->string('customer_name');
             $table->string('invoice_id');
             $table->string('grand_total');
             $table->string('payment');
@@ -31,6 +31,6 @@ class CreateWholeSaleChildrenTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('whole_sale_children');
+        Schema::dropIfExists('whole_sale_details');
     }
 }

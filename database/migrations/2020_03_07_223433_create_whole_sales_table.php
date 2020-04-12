@@ -13,11 +13,12 @@ class CreateWholeSalesTable extends Migration
      */
     public function up()
     {
-        Schema::create('whole_sales', function (Blueprint $table) {
-            $table->increments('whole_sale_id');
+        Schema::create('whole_sale_medicines', function (Blueprint $table) {
+            $table->increments('whole_sale_medicine_id');
             $table->string('invoice_id');
             $table->string('medicine_code');
             $table->string('quantity');
+            $table->string('sub_total');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateWholeSalesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('whole_sales');
+        Schema::dropIfExists('whole_sale_medicines');
     }
 }

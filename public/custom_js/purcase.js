@@ -11,7 +11,7 @@ $(".company_name").unbind().change(function() {
 	});
 });
 
-$(".medicine_name").unbind().change(function() {
+$(".medicine_name").change(function() {
 	$("#gif").show();
 	var medicine = $(this).val();
 	var quantity = $(".value_data").val();

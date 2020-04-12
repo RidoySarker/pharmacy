@@ -27,9 +27,9 @@ class PurcaseController extends Controller
         return response()->json($medicine, 200);
     }
 
-    public function medicine_list($medicine)
+    public function medicine_list($medicine_code)
     {
-        $medicine = Medicine::where('medicine_code', $medicine)->get();
+        $medicine = Medicine::where('medicine_code', $medicine_code)->get();
         return response()->json($medicine, 200);
     }
 
@@ -75,17 +75,17 @@ class PurcaseController extends Controller
         ];
         $stock=new Stock;
         $prev_stock=$stock::where('medicine_code',$request->medicine_code)->first();
-            if($prev_stock)
-                {
-                    $total_stock=$prev_stock->total_stock+$request->quantity;
-                    $prev_stock->update(['total_stock'=>$total_stock]);
-                }
-            else
-                {
-                    $stock->medicine_code=$request->medicine_code;
-                    $stock->total_stock=$request->quantity;
-                    $stock->save();
-                }
+        if($prev_stock)
+        {
+            $total_stock=$prev_stock->total_stock+$request->quantity;
+            $prev_stock->update(['total_stock'=>$total_stock]);
+        }
+        else
+        {
+            $stock->medicine_code=$request->medicine_code;
+            $stock->total_stock=$request->quantity;
+            $stock->save();
+        }
         Purcase::create($data);
         $response = [
             'msgtype' => 'success',

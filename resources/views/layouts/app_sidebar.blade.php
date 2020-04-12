@@ -1,5 +1,4 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
     <a href="admin" class="brand-link">
       <img src="{{asset('images/logo_pharmacy.png')}}" alt="AdminLTE Logo" class="brand-image" >
       <strong style="font-size: xx-large;">PMS</strong>
@@ -109,6 +108,31 @@
               </li>
             </ul>
           </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-shopping-bag"></i>
+              <p>
+                Sale
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('whole_sale')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Whole Sale</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('whole_sale.create')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Whole Sale Report</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
