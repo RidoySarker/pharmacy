@@ -21,6 +21,7 @@
 <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
 <script src="{{asset('toastr/toastr.min.js')}}"></script>
 <script src="{{asset('sweetalert/sweetalert.min.js')}}"></script>
+<script src="{{asset('js/selectize.min.js')}}"></script>
 <script>
 $(function () {
   $("#example1").DataTable();
@@ -43,5 +44,7 @@ $.ajaxSetup({
 </script>
 @yield('script')
 {!! Toastr::message() !!}
+
+
 </body>
 </html>

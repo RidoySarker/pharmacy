@@ -131,6 +131,20 @@
                 </a>
               </li>
             </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('retail_sale')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Retail Sale</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{url('retail_sale_report')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Retail Sale Report</p>
+                </a>
+              </li>
+            </ul>
           </li>
 
           <li class="nav-item has-treeview">

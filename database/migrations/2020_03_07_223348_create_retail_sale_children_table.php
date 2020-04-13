@@ -13,13 +13,12 @@ class CreateRetailSaleChildrenTable extends Migration
      */
     public function up()
     {
-        Schema::create('retail_sale_children', function (Blueprint $table) {
-            $table->increments('retail_sale_child_id');
-            $table->string('date');
-            $table->string('customer_name');
+        Schema::create('retail_sale_medicines', function (Blueprint $table) {
+            $table->increments('retail_sale_medicine_id');
             $table->string('invoice_id');
-            $table->string('grand_total');
-            $table->string('payment');
+            $table->string('medicine_code');
+            $table->string('quantity');
+            $table->string('sub_total');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateRetailSaleChildrenTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('retail_sale_children');
+        Schema::dropIfExists('retail_sale_medicines');
     }
 }
