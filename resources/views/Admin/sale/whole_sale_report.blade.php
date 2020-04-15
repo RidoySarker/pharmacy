@@ -39,7 +39,7 @@
                     <td>{{ $value->grand_total }}</td>
                     <td>{{ $value->payment }}</td>
                     <td>
-                      <button class="edit btn btn-outline-primary btn-xs" data="{{ $value->invoice_id }}"><i class="fa fa-edit"></i></button>
+                      <button class="edit btn btn-outline-primary btn-xs" data-toggle="modal" data-target=".bd-example-modal-lg" data="{{ $value->invoice_id }}"><i class="fa fa-eye"></i></button>
                       <button class="delete btn btn-outline-danger btn-xs" data="{{ $value->invoice_id }}"><i class="fa fa-trash-alt"></i></button>
                     </td>
                   </tr>
@@ -63,34 +63,75 @@
     </section>
 </div>
 
-<div id="addModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="myModalLabel">Add Category</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      </div>
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div id="invoice">
 
-      <div id="add_form"></div>
+                <div class="invoice overflow-auto">
+                    <div style="min-width: 600px">
+                        <header>
+                            <div class="row">
+                                <div class="col">
+                                    <img src="{{asset('images/logo.jpg')}}" class="image" />
+                                </div>
+                                <div class="col company-details">
+                                    <h2 class="name">
+                            Team #Hash
+                        </h2>
+                                    <div>TMSS Road, Kazipara, Mirpur 10</div>
+                                    <div>(088) 236 456-789</div>
+                                    <div>admin@example.com</div>
+                                </div>
+                            </div>
+                        </header>
+                        <div id="invoicedata"></div>
 
+                        <footer>
+                            Developed by :Team #Hash
+                        </footer>
+                    </div>
+
+                    <div></div>
+                    <div class="toolbar hidden-print">
+                        <div class="text-right">
+                            <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+                            <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
-
-<div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="myModalLabel">Edit Category</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      </div>
-
-      <div id="edit_form"></div>
-
-    </div>
-  </div>
 </div>
 @stop
 @section('script')
 <script src="/custom_js/whole_sale.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $('#printInvoice').click(function() {
+            Popup($('.invoice')[0].outerHTML);
+
+            function Popup(data) {
+                window.print();
+                return true;
+            }
+        });
+
+        $(document).on("click", ".edit", function() {
+            var data = $(this).attr("data");
+            $.ajax({
+                url: "/whole_sale/show/" + data,
+                taype: "get",
+                dataType: "html",
+                success: function(data) {
+                    $("#invoicedata").html(data);
+                }
+            });
+        });
+
+    });
+</script>
 @endsection

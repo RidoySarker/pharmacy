@@ -29,7 +29,6 @@
     </div>
 </section>
 <form id="form" method="post">
-<div id="error"></div>
   <div style="display: inline-flex;">
     <div class="title">DATE(M-D-Y)</div>
     <div class="title">COMPANY NAME</div>

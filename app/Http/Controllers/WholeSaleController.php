@@ -81,9 +81,11 @@ class WholeSaleController extends Controller
      * @param  \App\WholeSale  $wholeSale
      * @return \Illuminate\Http\Response
      */
-    public function show(WholeSale $wholeSale)
+    public function show($id)
     {
-        //
+        $whole_sale_detail = WholeSaleDetail::where('invoice_id', $id)->first();
+        $whole_sale_medicine = WholeSaleMedicine::where('invoice_id', $id)->get();
+        return view('Admin.sale.whole_invoice', ['whole_sale_detail' => $whole_sale_detail, 'whole_sale_medicine' => $whole_sale_medicine]);
     }
 
     /**
