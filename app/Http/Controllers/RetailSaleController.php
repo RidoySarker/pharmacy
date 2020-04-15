@@ -94,7 +94,7 @@ class RetailSaleController extends Controller
     {
       $invoice_data2=RetailSaleChild::where('invoice_id',$id)->get();
       $invoice_data1=RetailSale::where('invoice_id',$id)->first();
-      return view('Admin.sale.invoice',['invoice_data2'=>$invoice_data2,'invoice_data1'=>$invoice_data1]);
+      return view('Admin.sale.retail_invoice',['invoice_data2'=>$invoice_data2,'invoice_data1'=>$invoice_data1]);
     }
 
     /**

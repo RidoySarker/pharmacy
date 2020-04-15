@@ -74,10 +74,13 @@ Route::get('medicine_report/{name}', 'PurcaseController@medicine_report');
 Route::resource('whole_sale', 'WholeSaleController');
 Route::get('medicine_all/{medicine}', 'WholeSaleController@medicine_all');
 Route::post('whole_sale/store', 'WholeSaleController@store');
-//Whole_Sale
+Route::get('whole_sale/show/{id}', 'WholeSaleController@show');
+//Retail_Sale
 Route::resource('retail_sale', 'RetailSaleController');
 Route::get('all_medicine/{medicine}', 'RetailSaleController@all_medicine');
 Route::post('retail_sale/store', 'RetailSaleController@store');
 Route::get('retail_sale/show/{id}', 'RetailSaleController@show');
 Route::get('retail_sale_report', 'RetailSaleController@retail_sale_report');
-
+//Whole_Sale_Report
+Route::resource('whole_sale_report', 'WholeSaleReportController');
+Route::post('/store', 'WholeSaleReportController@store');

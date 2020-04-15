@@ -199,21 +199,21 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/tables/simple.html" class="nav-link">
+                <a href="{{url('whole_sale_report')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Inventory Report</p>
+                  <p>Whole Sale Report</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/tables/data.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Regular Transaction</p>
+                  <p>Retail Sale Report</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/tables/data.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Transaction Report</p>
+                  <p>Daily Report</p>
                 </a>
               </li>
             </ul>

@@ -24,7 +24,9 @@
             </tr>
         </thead>
         <tbody>
-            @php $sl=1; @endphp @foreach($invoice_data2 as $data) @php $medicine_data=DB::table('medicines')->where('medicine_code',$data->medicine_code)->first(); @endphp
+            @php $sl=1; @endphp 
+            @foreach($invoice_data2 as $data) 
+            @php $medicine_data=DB::table('medicines')->where('medicine_code',$data->medicine_code)->first(); @endphp
             <tr>
                 <td class="unit">{{$sl++}}</td>
                 <td class="text-center">{{$medicine_data->medicine_name}}</td>
