@@ -30,6 +30,7 @@
 </section>
 <form id="form" method="post">
   <div style="display: inline-flex;">
+    <div class="title">Batch ID</div>
     <div class="title">DATE(M-D-Y)</div>
     <div class="title">COMPANY NAME</div>
     <div class="title">MEDICINE NAME</div>
@@ -38,7 +39,15 @@
   <div style="display: -webkit-box;">
     <div class="form-group">
       <div class="col-sm-2">
-        <input type="date" name="date" class="form-control date" style="margin-left: 6px; width: 146px;">
+          @php
+          $batch_id = time();
+          @endphp
+        <input type="text" name="batch_id" value="{{$batch_id}}" class="form-control" style="margin-left: 6px; width: 146px;" readonly="">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-2">
+        <input type="date" name="date" class="form-control date" style="margin-left: 5px; width: 142px;">
       </div>
     </div>
     <div class="form-group">
@@ -97,6 +106,12 @@
                   </table>
                   <div class="details mt-3">
                     <table>
+                      <tr>
+                        <td class="title">Expire Date</td>
+                        <td>
+                          <input type="date" name="expire_date" class="form-control expire_date" style="height: 50px; width: 230px;" required="">
+                        </td>
+                      </tr>
                       <tr>
                         <td class="title">Medicine Name</td>
                         <td>

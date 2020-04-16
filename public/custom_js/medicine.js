@@ -25,7 +25,7 @@ $(document).ready(function() {
         if (data.msgtype=='success') {
           toastr["success"](data.message);
           $("#addModal").modal("hide");
-          window.setTimeout(function(){location.reload()},3000);
+          setTimeout(function(){location.reload();},900);
         } else {
           toastr["error"]("Something Went Wrong");
         }
@@ -34,7 +34,19 @@ $(document).ready(function() {
           var error=JSON.parse(text);
           $("#modal_form").find(".alert-danger").remove();
           $("#modal_form").find(".modal-body").prepend("<div class='alert alert-danger'>"+error.message+"</div>");
-      }    
+          $("#modal_form").find('.form-group').each(function(){
+            var $that =$(this);
+            $(this).find('.help-block').remove();
+            var inputName=$(this).find('[name]').first().attr('name');
+            if(error.errors[inputName])
+            {
+              $.each(error.errors[inputName],function(i,message){
+                $that.append('<span class="help-block" style="color:red;">'+message+'</span>');
+              })
+            }
+          });
+
+      }     
     });
   });
   //Edit_Modal
@@ -65,7 +77,7 @@ $(document).ready(function() {
         if (data.msgtype=='success') {
           toastr["success"](data.message);
           $("#editModal").modal("hide");
-          window.setTimeout(function(){location.reload()},3000);
+          setTimeout(function(){location.reload();},900);
         } else {
           toastr["error"]("Something Went Wrong");
         }
@@ -97,7 +109,7 @@ $(document).ready(function() {
           success: function(data) {
             if (data.msgtype=='success') {
               toastr["success"](data.message);
-              window.setTimeout(function(){location.reload()},3000);
+              setTimeout(function(){location.reload();},900);
             } else {
               toastr["error"]("Something Went Wrong");
             }

@@ -36,6 +36,7 @@
 	              <div class="card">
 	                <div class="card-header">
 	                  <h3><b style="color: #343a40">Whole Sale</b></h3>
+	                  <a class="btn btn-info" style="float:right;margin-top: -41px;" href="{{url('whole_sale_report')}}">Whole Sale Report</a> 
 	                </div>
 	                <div class="card-body">
 		                <form id="form" method="post">
@@ -52,8 +53,8 @@
 							    </div>
 							    <div class="form-group">
 							      <div class="col-sm-2">
-							      	<select name="customer_name" class="form-control" style="margin-left: -2px; width: 200px;">
-							      		<option>--Select--</option>
+							      	<select id="select-state" name="customer_name" class="form-control" style="margin-left: -2px; width: 200px;">
+							      		<option value="">Select Customer</option>
 							      		@foreach($customer as $value)
 							      		<option value="{{ $value->customer_name }}">{{ $value->customer_name }}</option>
 							      		@endforeach
@@ -72,8 +73,8 @@
 		                  <table>	                      
 		                    <tr>
 		                        <td>
-		                        	<select class="form-control medicine_code" name="medicine_code[]" style="width: 201px;">
-		                        		<option>Select</option>
+		                        	<select id="select-state" class="form-control medicine_code" name="medicine_code[]" style="width: 201px;">
+		                        		<option value="">Select Medicine</option>
 		                        		@foreach($medicine as $value)
 		                        		<option value="{{ $value->medicine_code }}">{{ $value->medicine_name }}</option>
 		                        		@endforeach
@@ -136,6 +137,11 @@
 @section('script')
 <script type="text/javascript">
 	$(document).ready(function() {
+
+      $('select').selectize({
+	          sortField: 'text'
+	      });
+
 		var now = new Date();
 		var day = ("0" + now.getDate()).slice(-2);
 		var month = ("0" + (now.getMonth() + 1)).slice(-2);
@@ -225,7 +231,8 @@
 			success: function(data) {
 				if (data.msgtype=='success') {
 	              toastr["success"](data.message);
-	              window.setTimeout(function(){location.reload()},2000);
+	              setTimeout(function(){location.reload();},900);
+	              $("#form").trigger( "reset" );
 	            } else {
 	              toastr["error"]("Something Went Wrong");
 	            }

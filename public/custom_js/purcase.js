@@ -1,3 +1,10 @@
+		var now = new Date();
+		var day = ("0" + now.getDate()).slice(-2);
+		var month = ("0" + (now.getMonth() + 1)).slice(-2);
+		var today = now.getFullYear()+"-"+(month)+"-"+(day);
+		$(".date").val(today);
+
+
 $(".company_name").unbind().change(function() {
 	var company = $(this).val();
 
@@ -82,7 +89,8 @@ $("#form").submit(function(e) {
 		success: function(data) {
 			if(data.msgtype=="success") {
 				toastr["success"](data.message);
-				window.setTimeout(function(){location.reload()},3000);
+				setTimeout(function(){location.reload();},900);
+				$("#form").trigger( "reset" );
 			} else {
 				toastr["error"]("Something Went Wrong");
 			}
@@ -114,7 +122,7 @@ $(".delete").click(function() {
           success: function(data) {
             if (data.msgtype=='success') {
               toastr["success"](data.message);
-              window.setTimeout(function(){location.reload()},3000);
+              setTimeout(function(){location.reload();},900);
             } else {
               toastr["error"]("Something Went Wrong");
             }
@@ -168,7 +176,7 @@ $("#edit_form").on("submit", "#edit_form", function(e) {
         if (data.msgtype=='success') {
           toastr["success"](data.message);
           $("#editModal").modal("hide");
-          window.setTimeout(function(){location.reload()},3000);
+          setTimeout(function(){location.reload();},900);
         } else {
           toastr["error"]("Something Went Wrong");
         }

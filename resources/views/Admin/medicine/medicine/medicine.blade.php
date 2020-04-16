@@ -64,21 +64,6 @@
                   </tr>
                   @endforeach
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <th>Sl No.</th>
-                    <th>Medicine Code</th>
-                    <th>Medicine Name</th>
-                    <th>Catagory</th>
-                    <th>Company Name</th>
-                    <th>Desk Name</th>
-                    <th>Purcase Price</th>
-                    <th>Retail Price</th>
-                    <th>Whole Sale Price</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
-                </tfoot>
               </table>
             </div>
           </div>

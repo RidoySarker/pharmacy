@@ -44,7 +44,11 @@
                     <td>{{$value->medicine_name}}</td>
                     <td>
                       @if($value->total_stock>0)
+                        @if($value->total_stock>10)
                         <span style="color: green;">{{$value->total_stock}}</span>
+                        @else
+                        <span style="color: red;">{{$value->total_stock}}</span>
+                        @endif
                       @else
                         <span style="color: red;">Out Of Stock</span>
                       @endif

@@ -70,7 +70,7 @@ class WholeSaleController extends Controller
         }
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Inserted Successfully',
+            'message' => 'Whole Sale Add Successfully',
         ];
         echo json_encode($response);
     }
@@ -123,7 +123,7 @@ class WholeSaleController extends Controller
         WholeSaleMedicine::where('invoice_id', $id)->delete();
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Deleted Successfully',
+            'message' => 'Whole Sale Delete Successfully',
         ];
         echo json_encode($response);
     }

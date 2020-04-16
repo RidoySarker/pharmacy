@@ -25,7 +25,7 @@ $(document).ready(function(){
         if (data.msgtype=='success') {
           toastr["success"](data.message);
           $("#addModal").modal("hide");
-          window.setTimeout(function(){location.reload()},500);
+          setTimeout(function(){location.reload();},900);
         } else {
           toastr["error"]("Something Went Wrong");
         }
@@ -78,7 +78,7 @@ $(document).ready(function(){
         if (data.msgtype=='success') {
           toastr["success"](data.message);
           $("#editModal").modal("hide");
-          window.setTimeout(function(){location.reload()},500);
+          setTimeout(function(){location.reload();},900);
         } else {
           toastr["error"]("Something Went Wrong");
         }
@@ -112,7 +112,7 @@ $(document).ready(function(){
           success: function(data) {
             if (data.msgtype=='success') {
               toastr["success"](data.message);
-              window.setTimeout(function(){location.reload()},500);
+              setTimeout(function(){location.reload();},900);
             } else {
               toastr["error"]("Something Went Wrong");
             }

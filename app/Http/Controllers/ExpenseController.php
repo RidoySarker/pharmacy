@@ -116,7 +116,7 @@ class ExpenseController extends Controller
         Expense::where('expense_catagory_id', $id)->delete();
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Deleted Successfully',
+            'message' => 'Expense Catagory Delete Successfully',
         ];
         echo json_encode($response);
     }

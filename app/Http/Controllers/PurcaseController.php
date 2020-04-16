@@ -65,6 +65,8 @@ class PurcaseController extends Controller
 
         $data = [
             'date'          => $request->date,
+            'batch_id'          => $request->batch_id,
+            'expire_date'   => $request->expire_date,
             'company_name'  => $request->company_name,
             'medicine_code' => $request->medicine_code,
             'quantity'      => $request->quantity,
@@ -82,6 +84,8 @@ class PurcaseController extends Controller
         }
         else
         {
+            $stock->batch_id=$request->batch_id;
+            $stock->expire_date=$request->expire_date;
             $stock->medicine_code=$request->medicine_code;
             $stock->total_stock=$request->quantity;
             $stock->save();
@@ -89,7 +93,7 @@ class PurcaseController extends Controller
         Purcase::create($data);
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Inserted Successfully',
+            'message' => 'Purcase Successfully',
         ];
         echo json_encode($response);
     }
@@ -160,7 +164,7 @@ class PurcaseController extends Controller
         $purcase_data->update(['pay' => $total_pay, 'rest' => $request->rest]);
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Updated Successfully',
+            'message' => 'Purcase Updated Successfully',
         ];
         echo json_encode($response);
     }
@@ -176,9 +180,14 @@ class PurcaseController extends Controller
         Purcase::where('purcase_id', $id)->delete();
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Deleted Successfully',
+            'message' => 'Purcase Delete Successfully',
         ];
         echo json_encode($response);
+    }
+
+    public function expire_date()
+    {
+        
     }
 
 }

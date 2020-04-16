@@ -69,7 +69,7 @@ class MedicineController extends Controller
         Medicine::create($data);
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Inserted Successfully',
+            'message' => 'Medicine Add Successfully',
         ];
         echo json_encode($response);
     }
@@ -137,7 +137,7 @@ class MedicineController extends Controller
         Medicine::where('medicine_id', $id)->update($data);
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Updated Successfully',
+            'message' => 'Medicine Update Successfully',
         ];
         echo json_encode($response);
     }
@@ -153,7 +153,7 @@ class MedicineController extends Controller
         Medicine::where('medicine_id', $id)->delete();
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Deleted Successfully',
+            'message' => 'Medicine Delete Successfully',
         ];
         echo json_encode($response);
     }

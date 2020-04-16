@@ -15,6 +15,8 @@ class CreateStocksTable extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->increments('stock_id');
+            $table->string('batch_id');
+            $table->string('expire_date',50);
             $table->string('medicine_code');
             $table->string('total_stock');
             $table->timestamps();

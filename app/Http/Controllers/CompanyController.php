@@ -53,7 +53,7 @@ class CompanyController extends Controller
         Company::create($data);
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Inserted Successfully',
+            'message' => 'Company Add Successfully',
         ];
         echo json_encode($response);
     }
@@ -108,7 +108,7 @@ class CompanyController extends Controller
         Company::where('company_id', $id)->update($data);
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Updated Successfully',
+            'message' => 'Company Update Successfully',
         ];
         echo json_encode($response);
     }
@@ -124,7 +124,7 @@ class CompanyController extends Controller
         Company::where('company_id', $id)->delete();
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Deleted Successfully',
+            'message' => 'Company Delete Successfully',
         ];
         echo json_encode($response);
     }

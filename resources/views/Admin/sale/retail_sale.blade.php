@@ -34,7 +34,8 @@
 	            <div class="col-12">
 	              <div class="card">
 	                <div class="card-header">
-	                  <h3><b style="color: #343a40">Retail Sale</b></h3>
+	                  <h3><b style="color: #343a40">Retail Sale</b></h3>	
+	                  <a class="btn btn-info" style="float:right;margin-top: -41px;" href="{{url('retail_sale_report')}}">Retail Sale Report</a> 
 	                </div>
 	                <div class="card-body">
 		                <form id="form" method="post">
@@ -130,14 +131,12 @@
 @section('script')
 
 
-
 <script type="text/javascript">
 	$(document).ready(function(){
 
-      $('select').selectize({
-	          sortField: 'text'
-	      });
-
+          $('select').selectize({
+            sortField: 'text'
+        });
 		var now = new Date();
 		var day = ("0" + now.getDate()).slice(-2);
 		var month = ("0" + (now.getMonth() + 1)).slice(-2);
@@ -231,7 +230,8 @@
 			success: function(data) {
 				if (data.msgtype=='success') {
 	              toastr["success"](data.message);
-	              window.setTimeout(function(){location.reload()},1000);
+	              setTimeout(function(){location.reload();},900);
+	              $("#form").trigger( "reset" );
 	            } else {
 	              toastr["error"]("Something Went Wrong");
 	            }

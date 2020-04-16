@@ -15,7 +15,9 @@ class CreatePurcasesTable extends Migration
     {
         Schema::create('purcases', function (Blueprint $table) {
             $table->increments('purcase_id');
+            $table->string('batch_id');
             $table->string('date',50);
+            $table->string('expire_date',50);
             $table->string('company_name',50);
             $table->string('medicine_code',50);
             $table->string('quantity',50);

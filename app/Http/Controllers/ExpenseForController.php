@@ -50,7 +50,7 @@ class ExpenseForController extends Controller
         ExpenseFor::create($data);
         $response = [
             'msgtype' => 'success',
-            'message' => 'Expense For Add Successfully',
+            'message' => 'Expense Add Successfully',
         ];
         echo json_encode($response);
     }
@@ -102,7 +102,7 @@ class ExpenseForController extends Controller
         ExpenseFor::where('expense_for_id',$id)->update($data);
         $response = [
             'msgtype' => 'success',
-            'message' => 'Expense For Update Successfully',
+            'message' => 'Expense Update Successfully',
         ];
         echo json_encode($response);
     }
@@ -118,7 +118,7 @@ class ExpenseForController extends Controller
         ExpenseFor::where('expense_for_id', $id)->delete();
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Deleted Successfully',
+            'message' => 'Expense Delete Successfully',
         ];
         echo json_encode($response);
     }

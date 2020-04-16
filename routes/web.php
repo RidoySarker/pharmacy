@@ -70,6 +70,8 @@ Route::get('/rest_report', 'PurcaseController@rest_report');
 Route::get('stock_report', 'PurcaseController@stock_report');
 Route::get('medicine_report', 'PurcaseController@medicine_data');
 Route::get('medicine_report/{name}', 'PurcaseController@medicine_report');
+Route::get('/expire_date', 'StockController@index');
+Route::get('/out_of_stock', 'StockController@out_of_stock');
 //Whole_Sale
 Route::resource('whole_sale', 'WholeSaleController');
 Route::get('medicine_all/{medicine}', 'WholeSaleController@medicine_all');
@@ -84,3 +86,7 @@ Route::get('retail_sale_report', 'RetailSaleController@retail_sale_report');
 //Whole_Sale_Report
 Route::resource('whole_sale_report', 'WholeSaleReportController');
 Route::post('/store', 'WholeSaleReportController@store');
+
+//Retail_Sale_Report
+Route::resource('retailsale_report', 'RetailSaleReportController');
+Route::post('retailsale_report/store', 'RetailSaleReportController@store');

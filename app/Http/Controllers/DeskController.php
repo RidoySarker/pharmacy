@@ -49,7 +49,7 @@ class DeskController extends Controller
         Desk::create($data);
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Inserted Successfully',
+            'message' => 'Desk Add Successfully',
         ];
         echo json_encode($response);
     }
@@ -100,7 +100,7 @@ class DeskController extends Controller
         Desk::where('desk_id', $id)->update($data);
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Updated Successfully',
+            'message' => 'Desk Update Successfully',
         ];
         echo json_encode($response);
     }
@@ -116,7 +116,7 @@ class DeskController extends Controller
         Desk::where('desk_id', $id)->delete();
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Deleted Successfully',
+            'message' => 'Desk Delete Successfully',
         ];
         echo json_encode($response);
     }

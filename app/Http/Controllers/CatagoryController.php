@@ -51,7 +51,7 @@ class CatagoryController extends Controller
         Catagory::create($data);
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Inserted Successfully',
+            'message' => 'Category Add Successfully',
         ];
         echo json_encode($response);
     }
@@ -102,7 +102,7 @@ class CatagoryController extends Controller
         Catagory::where('catagory_id', $id)->update($data);
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Updated Successfully',
+            'message' => 'Category Update Successfully',
         ];
         echo json_encode($response);
     }
@@ -118,7 +118,7 @@ class CatagoryController extends Controller
         Catagory::where('catagory_id', $id)->delete();
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Deleted Successfully',
+            'message' => 'Category Delete Successfully',
         ];
         echo json_encode($response);
     }

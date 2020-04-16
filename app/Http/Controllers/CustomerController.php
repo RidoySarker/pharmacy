@@ -119,7 +119,7 @@ class CustomerController extends Controller
         Customer::where('customer_id', $id)->delete();
         $response = [
             'msgtype' => 'success',
-            'message' => 'Data Deleted Successfully',
+            'message' => 'Customer Delete Successfully',
         ];
         echo json_encode($response);
     }

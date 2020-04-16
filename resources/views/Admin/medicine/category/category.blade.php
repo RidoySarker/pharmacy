@@ -9,7 +9,7 @@
             <h1>Category</h1>
           </div>
           <div class="col-sm-6">
-            <button type="button" style="margin-left: 458px;" class="btn btn-info btn-sm" id="add">Add New</button>
+            <button type="button" style="margin-left: 445px;" class="btn btn-info btn-sm" id="add">Add New</button>
           </div>
         </div>
     </section>
@@ -52,15 +52,6 @@
                   </tr>
                   @endforeach
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <th>Sl No.</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
-                </tfoot>
               </table>
             </div>
           </div>

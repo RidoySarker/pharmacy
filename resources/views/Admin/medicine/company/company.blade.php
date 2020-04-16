@@ -1,19 +1,17 @@
 @extends('layouts.app')
 @section('title', 'Company')
 @section('content')
-<!DOCTYPE html>
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Company</h1>
-          </div>
-          <div class="col-sm-6">
-            <button type="button" style="margin-left: 458px;" class="btn btn-info btn-sm" id="add">Add New</button>
-          </div>
-        </div>
-    </section>
+<section class="content-header">
+<div class="card">
+  <div class="card-header">
+  <h1 class="card-title">Company</h1>
 
+ 
+    <button type="button" style="float:right;" class="btn btn-info btn-sm" id="add">Add New</button>
+
+</div>
+</div>
+</section>
     <section class="content">
       <div class="row">
         <div class="col-12">
@@ -56,17 +54,6 @@
                   </tr>
                   @endforeach
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <th>Sl No.</th>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
-                </tfoot>
               </table>
             </div>
           </div>

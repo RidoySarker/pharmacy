@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Purcase;
 use App\Stock;
+use App\Medicine;
 use Illuminate\Http\Request;
 
 class StockController extends Controller
@@ -14,9 +16,16 @@ class StockController extends Controller
      */
     public function index()
     {
-        //
+        $c_date=date('Y-m-d');
+        $expire_data['expire_data'] = Purcase::whereDate('expire_date', '<=', $c_date)->get();
+        return view('Admin.stock.expire_date',$expire_data);
     }
 
+    public function out_of_stock()
+    {
+        $stock_data['stock_data'] = Stock::where('total_stock', '=', 0)->get();
+        return view('Admin.stock.out_of_stock',$stock_data);
+    }
     /**
      * Show the form for creating a new resource.
      *

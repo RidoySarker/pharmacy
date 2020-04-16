@@ -72,17 +72,6 @@ class WholeSaleReportController extends Controller
             $table.="</tr>";
         }
         $table.="</tbody>";
-        $table.="<tfoot>";
-        $table.="<tr>";
-        $table.="<th>Medicine Name</th>";
-        $table.="<th>Catagory</th>";
-        $table.="<th>Company Name</th>";
-        $table.="<th>Quantity</th>";
-        $table.="<th>Purcase Bill</th>";
-        $table.="<th>Whole sale Bill</th>";
-        $table.="<th>Profit</th>";
-        $table.="</tr>";
-        $table.="</tfoot>";
         $table.="</table>";
 
         echo $table;

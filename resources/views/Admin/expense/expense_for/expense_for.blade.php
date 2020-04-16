@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('title', 'Expense Catagory | Pharmacy')
+@section('title', 'Expense | Pharmacy')
 @section('content')
 <!DOCTYPE html>
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Expense For</h1>
+            <h1>Expense</h1>
           </div>
           <div class="col-sm-6">
             <button type="button" style="margin-left: 380px;" class="btn btn-rounded btn-primary mb-2 mr-2" id="add">Add Expense</button>
@@ -19,7 +19,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Expense For List</h3>
+              <h3 class="card-title">Expense List</h3>
             </div>
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
@@ -58,7 +58,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="myModalLabel">Add Expense For</h5>
+        <h5 class="modal-title" id="myModalLabel">Add Expense</h5>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       </div>
 
@@ -72,7 +72,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="myModalLabel">Edit Expense For</h5>
+        <h5 class="modal-title" id="myModalLabel">Edit Expense</h5>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       </div>
 

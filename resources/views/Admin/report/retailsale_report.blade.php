@@ -1,10 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Whole Sale Report')
+@section('title', 'Retail Sale Report')
 @section('content')
+
 <section class="content-header">
 <div class="card">
   <div class="card-header">
-  <h1 class="card-title">Whole Sale Report</h1>
+  <h1 class="card-title">Retail Sale Report</h1>
 </div>
 </div>
 </section>
@@ -40,7 +41,7 @@
       <div class="card">
         <div class="card-body">
           
-          <div id="dataList"></div>
+          <div id="retaildata"></div>
 
         </div>
       </div>
@@ -49,5 +50,5 @@
 </section>
 @stop
 @section('script')
-<script src="custom_js/whole_sale_report.js"></script>
+<script src="custom_js/retail_sale_report.js"></script>
 @endsection

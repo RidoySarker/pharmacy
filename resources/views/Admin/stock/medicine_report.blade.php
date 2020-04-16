@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Medicne Wise Report')
 @section('content')
-<!DOCTYPE html>
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
