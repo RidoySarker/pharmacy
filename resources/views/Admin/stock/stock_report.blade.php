@@ -38,7 +38,7 @@
                 </thead>
                 <tbody>
                   @foreach($stock_data as $key => $value)
-                  <tr>
+                  <tr> 
                     <td>{{$key+1}}</td>
                     <td>{{$value->company_name}}</td>
                     <td>{{$value->medicine_name}}</td>
@@ -67,5 +67,4 @@
       </div>
     </section>
 </div>
-
 @stop

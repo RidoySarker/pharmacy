@@ -1,4 +1,6 @@
-@extends('layouts.app') @section('title') Team #Hash Pharmacy Dashboard @endsection @section('content')
+@extends('layouts.app') 
+@section('title') Team #Hash Pharmacy Dashboard @endsection 
+@section('content')
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -21,12 +23,7 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>
-                  @php
-                  $stock_data = DB::table('stocks')->get();
-                  @endphp
-                  {{collect($stock_data)->sum('total_stock')}}
-                </h3>
+                        <h3></h3>
 
                         <p>Total Stock</p>
                     </div>
@@ -39,12 +36,7 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>
-                          @php
-                           $company=DB::table('companies')->get();
-                          @endphp
-                          {{collect($company)->count('company_id')}}
-                        </h3>
+                        <h3 id="company"></h3>
                         <p>Total Company</p>
                     </div>
                     <div class="icon">
@@ -56,12 +48,7 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>
-                          @php
-                           $company=DB::table('customers')->get();
-                          @endphp
-                          {{collect($company)->count('customer_id')}}
-                        </h3>
+                        <h3 id="customer"></h3>
 
                         <p>Total Customer</p>
                     </div>
@@ -74,12 +61,7 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>
-                          @php
-                           $medicines=DB::table('medicines')->get();
-                          @endphp
-                          {{collect($medicines)->count('medicine_id')}}
-                        </h3>
+                        <h3 id="medicine"></h3>
 
                         <p>Total Medicine</p>
                     </div>
@@ -92,13 +74,7 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>
-                        @php
-                        $out_stocks=DB::table('stocks')->where('total_stock','=',0)->get();
-                        @endphp
-                        {{collect($out_stocks)->count('medicine_code')}}
-
-                        </h3>
+                        <h3></h3>
 
                         <p>Out Of Stock</p>
                     </div>
@@ -111,15 +87,9 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>
-                            @php
-                            $c_date=date('Y-m-d');
-                            $ex_date = DB::table('purcases')->whereDate('expire_date', '<=', $c_date)->get();
-                            @endphp
-                            {{collect($ex_date)->count('expire_date')}}
-                        </h3>
+                        <h3 id="expire"></h3>
 
-                        <p>Expired</p>
+                        <p>Expired</p> 
                     </div>
                     <div class="icon">
                         <i class="fas fa-skull-crossbones"></i>
@@ -130,16 +100,7 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>
-                          @php
-                           $retail_invoice=DB::table('retail_sale_medicines')->get();
-                           $whole_invoice=DB::table('whole_sale_medicines')->get();
-                          $r_invoice=collect($retail_invoice)->count('invoice_id');
-                          $w_invoice=collect($whole_invoice)->count('invoice_id');
-                          $total_invoice=$r_invoice+$w_invoice;
-                          @endphp
-                          {{$total_invoice}}
-                        </h3>
+                        <h3 id="invoice"></h3>
                         <p>Total Invoice</p>
                     </div>
                     <div class="icon">
@@ -152,12 +113,7 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>
-                  @php
-                  $expenses = DB::table('expense_fors')->get();
-                  @endphp
-                  {{collect($expenses)->sum('expense_cost')}}
-                        </h3>
+                        <h3 id="expense"></h3>
 
                         <p>Total Expense</p>
                     </div>
@@ -172,5 +128,107 @@
 
     </div>
 </section>
+@endsection
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function() {
+        getCustomer();
+        getCompany();
+        getMedicine();
+        getExpense();
+        getExpire();
+        getInvoice();
 
+        function getCustomer() {
+            
+            $.ajax({
+                url: "/customer_data",
+                type: "get",
+                cache: false,
+                datatype: "html",
+                success: function(data) {
+                    $("#customer").html(data);
+                }
+            });
+
+        }
+
+        function getCompany() {
+            
+            $.ajax({
+                url: "/company_data",
+                type: "get",
+                cache: false,
+                datatype: "html",
+                success: function(data) {
+                    $("#company").html(data);
+                }
+            });
+
+        }
+
+        function getMedicine() {
+            
+            $.ajax({
+                url: "/medicine_data",
+                type: "get",
+                cache: false,
+                datatype: "html",
+                success: function(data) {
+                    $("#medicine").html(data);
+                }
+            });
+
+        }
+
+        function getExpire() {
+            
+            $.ajax({
+                url: "/expire_data",
+                type: "get",
+                cache: false,
+                dataType: "html",
+                success: function(data) {
+                    $("#expire").html(data);
+                }
+            });
+
+        }
+
+        function getInvoice() {
+            
+            $.ajax({
+                url: "/invoice_data",
+                type: "get",
+                cache: false,
+                datatype: "html",
+                success: function(data) {
+                    $("#invoice").html(data);
+                }
+            });
+
+        }
+
+        function getExpense() {
+            
+            $.ajax({
+                url: "/expense_data",
+                type: "get",
+                cache: false,
+                datatype: "html",
+                success: function(data) {
+                    $("#expense").html(data);
+                }
+            });
+
+        }
+        setInterval(getCustomer, 100000);
+        setInterval(getCompany, 100000);
+        setInterval(getMedicine, 100000);
+        setInterval(getMedicine, 100000);
+        setInterval(getInvoice, 100000);
+        setInterval(getExpense, 100000);
+        setInterval(getExpire, 100000);
+    });
+</script>
 @endsection

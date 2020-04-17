@@ -65,7 +65,7 @@ class PurcaseController extends Controller
 
         $data = [
             'date'          => $request->date,
-            'batch_id'          => $request->batch_id,
+            'batch_id'      => $request->batch_id,
             'expire_date'   => $request->expire_date,
             'company_name'  => $request->company_name,
             'medicine_code' => $request->medicine_code,
@@ -75,22 +75,16 @@ class PurcaseController extends Controller
             'pay'           => $request->pay,
             'rest'          => $request->rest,
         ];
-        $stock=new Stock;
-        $prev_stock=$stock::where('medicine_code',$request->medicine_code)->first();
-        if($prev_stock)
-        {
-            $total_stock=$prev_stock->total_stock+$request->quantity;
-            $prev_stock->update(['total_stock'=>$total_stock]);
-        }
-        else
-        {
-            $stock->batch_id=$request->batch_id;
-            $stock->expire_date=$request->expire_date;
-            $stock->medicine_code=$request->medicine_code;
-            $stock->total_stock=$request->quantity;
+        Purcase::create($data);
+        for ($i=0; $i<($request->quantity); $i++) { 
+            $stock = new Stock;
+            $stock->batch_id = $request->batch_id;
+            $stock->medicine_code = $request->medicine_code;
+            $stock->expire_date = $request->expire_date;
+            $stock->stock_status = $request->stock_status;
             $stock->save();
         }
-        Purcase::create($data);
+
         $response = [
             'msgtype' => 'success',
             'message' => 'Purcase Successfully',

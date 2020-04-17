@@ -170,21 +170,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
+                <a href="{{url('daily_report')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Daily Report</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{url('retailsale_report')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Retail Sale Profit</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{url('whole_sale_report')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Whole Sale Profit</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -197,6 +185,18 @@
                 <a href="{{route('whole_sale.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Whole Sale Report</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{url('retailsale_report')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Retail Sale Profit</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{url('whole_sale_report')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Whole Sale Profit</p>
                 </a>
               </li>
             </ul>

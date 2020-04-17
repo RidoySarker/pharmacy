@@ -155,6 +155,11 @@
                         </td>
                       </tr>
                       <tr>
+                        <td>
+                          <input type="text" style="height: 50px; width: 230px;" name="stock_status" value="Active" class="form-control status" hidden>
+                        </td>
+                      </tr>
+                      <tr>
                         <td></td>
                         <td>
                           <button type="submit" class="btn btn-primary submit">Save To Stock</button>

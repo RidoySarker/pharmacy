@@ -80,6 +80,7 @@ $(".pay").keyup(function() {
 $("#form").submit(function(e) {
 	e.preventDefault();
 	var data = $(this).serializeArray();
+	console.log(data);
 	
 	$.ajax({
 		url     : "purcase/store",

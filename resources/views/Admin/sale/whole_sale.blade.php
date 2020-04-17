@@ -62,6 +62,7 @@
 							      </div>
 							    </div>
 							    <div class="message"></div>
+							    <input type="hidden" id="count">
 							 </div>
 							<div style="display: inline-flex; margin-left: -14px;">
 							    <div class="title">Medicine Name</div>
@@ -196,9 +197,11 @@
 		$.ajax({
 			url: "/medicine_all/"+medicine_code,
 			success: function(data) {
-				if(data.total_stock>0) {
-					row.find(".price").val(data.whole_sell_price);
-					$(".message").html("<font style='color:green;font-size: 25px;'>"+data.total_stock+" MEDICINE IN STOCK</font>")
+				var count = Object.keys(data).length;
+				$("#count").val(count);
+				if(count>0) {
+					row.find(".price").val(data[0].whole_sell_price);
+					$(".message").html("<font style='color:green;font-size: 25px;'>"+count+" MEDICINE IN STOCK</font>")
 				} else {
 					$(".message").html("<font style='color:red;font-size: 25px;'>MEDICINE IS OUT OF STOCK</font>")
 				}
@@ -207,16 +210,24 @@
 	});
 
 	$(document).on("keyup", ".quantity", function() {
+		var count = parseInt($("#count").val());
 		var quantity = $(this).val();
-		var price = $(this).closest("tr").find(".price").val();
-		var sub_total = parseInt(quantity*price);
-		$(this).closest("tr").find(".sub_total").val(sub_total);
-		var total = 0;
-		$(".sub_total").each(function() {
-			var value = parseInt($(this).val());
-			total = parseInt(total+value)
-			$(".grandTotal").val(total);
-		});
+		if (quantity <= count) {
+			$(".submit").attr("disabled", false);
+			var price = $(this).closest("tr").find(".price").val();
+			var sub_total = parseInt(quantity*price);
+			$(this).closest("tr").find(".sub_total").val(sub_total);
+			var total = 0;
+			$(".sub_total").each(function() {
+				var value = parseInt($(this).val());
+				total = parseInt(total+value)
+				$(".grandTotal").val(total);
+			});
+		} 
+		else {
+			$(".submit").attr("disabled", true);
+		}
+		
 	});
 
 	$(document).on("submit", "#form", function(e) {

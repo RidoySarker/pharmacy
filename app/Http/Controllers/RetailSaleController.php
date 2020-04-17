@@ -61,9 +61,9 @@ class RetailSaleController extends Controller
         $retail_sale->save();
 
         for ($i=0; $i<count($request->medicine_code); $i++) { 
-            $stock = Stock::where('medicine_code', $request->medicine_code[$i])->first();
-            $stock_update = $stock->total_stock-$request->quantity[$i];
-            $stock->update(['total_stock' => $stock_update]);
+            $stock = Stock::where('medicine_code', $request->medicine_code[$i])->where('stock_status', 'Active')
+                ->limit($request->quantity[$i]);
+            $stock->update(['stock_status' => 'Deactivate']);
             $retail_sale_medicine = new RetailSaleChild;
             $retail_sale_medicine->invoice_id = $request->invoice_id;
             $retail_sale_medicine->medicine_code = $request->medicine_code[$i];
@@ -75,7 +75,7 @@ class RetailSaleController extends Controller
             'msgtype' => 'success',
             'message' => 'Retail Sale Successfully',
         ];
-        echo json_encode($response);
+        return response()->json($response , 200);
     }
 
     /**
