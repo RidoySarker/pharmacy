@@ -26,6 +26,13 @@ Route::get('/admin', 'AdminController@index');
 Route::get('/home', function () {
     return Redirect::to('admin');
 });
+//Dashboard_Data
+Route::get('/customer_data', 'AdminController@customer_data');
+Route::get('/company_data', 'AdminController@company_data');
+Route::get('/medicine_data', 'AdminController@medicine_data');
+Route::get('/expense_data', 'AdminController@expense_data');
+Route::get('/invoice_data', 'AdminController@invoice_data');
+Route::get('/expire_data', 'AdminController@expire_data');
 //Catagory
 Route::resource('catagory', 'CatagoryController');
 Route::post('catagory/store', 'CatagoryController@store');
@@ -86,7 +93,8 @@ Route::get('retail_sale_report', 'RetailSaleController@retail_sale_report');
 //Whole_Sale_Report
 Route::resource('whole_sale_report', 'WholeSaleReportController');
 Route::post('/store', 'WholeSaleReportController@store');
-
 //Retail_Sale_Report
 Route::resource('retailsale_report', 'RetailSaleReportController');
 Route::post('retailsale_report/store', 'RetailSaleReportController@store');
+//Daily_Report
+Route::resource('daily_report', 'DailyReportController');

@@ -28,11 +28,6 @@
           <i class="fas fa-exclamation-triangle"></i>
 
           <span class="badge badge-danger navbar-badge">
-                            @php
-                            $c_date=date('Y-m-d');
-                            $ex_date = DB::table('purcases')->whereDate('expire_date', '<=', $c_date)->get();
-                            @endphp
-                            {{collect($ex_date)->count('expire_date')}}
           </span>
         </a>
 
@@ -41,10 +36,6 @@
         <a class="nav-link"  href="{{url('out_of_stock')}}">
           <i class="far fa-bell"></i>
           <span class="badge badge-warning navbar-badge">
-                        @php
-                        $out_stocks=DB::table('stocks')->where('total_stock','=',0)->get();
-                        @endphp
-                        {{collect($out_stocks)->count('medicine_code')}}
           </span>
         </a>
       </li>

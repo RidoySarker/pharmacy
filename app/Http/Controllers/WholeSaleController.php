@@ -26,7 +26,7 @@ class WholeSaleController extends Controller
 
     public function medicine_all($medicine)
     {
-        $medicine = Medicine::join('stocks','stocks.medicine_code','=','medicines.medicine_code')->where('medicines.medicine_code',$medicine)->first();
+        $medicine = Medicine::join('stocks','stocks.medicine_code','=','medicines.medicine_code')->where('medicines.medicine_code',$medicine)->where('stock_status', 'Active')->get();
         return response()->json($medicine, 200);
     }
 
@@ -56,11 +56,11 @@ class WholeSaleController extends Controller
         $whole_sale_detail->grand_total = $request->grand_total;
         $whole_sale_detail->payment = $request->payment;
         $whole_sale_detail->save();
-
-        for ($i=0; $i<count($request->medicine_code); $i++) { 
-            $stock = Stock::where('medicine_code', $request->medicine_code[$i])->first();
-            $stock_qty = $stock->total_stock-$request->quantity[$i];
-            $stock->update(['total_stock' => $stock_qty]);
+        $_count_medicine = count($request->medicine_code);
+        for ( $i = 0; $i< $_count_medicine; $i++ ) { 
+            $stock = Stock::where('medicine_code', $request->medicine_code[$i])->where('stock_status', 'Active')
+                ->limit($request->quantity[$i]);
+            $stock->update(['stock_status' => 'Deactivate']);
             $whole_sale_medicine = new WholeSaleMedicine;
             $whole_sale_medicine->invoice_id = $request->invoice_id;
             $whole_sale_medicine->medicine_code = $request->medicine_code[$i];
@@ -68,11 +68,12 @@ class WholeSaleController extends Controller
             $whole_sale_medicine->sub_total = $request->sub_total[$i];
             $whole_sale_medicine->save();
         }
+        //exit();
         $response = [
             'msgtype' => 'success',
             'message' => 'Whole Sale Add Successfully',
         ];
-        echo json_encode($response);
+        return response()->json($response , 200);
     }
 
     /**
