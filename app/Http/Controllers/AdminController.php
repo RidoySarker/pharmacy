@@ -7,8 +7,8 @@ use App\Customer;
 use App\Company;
 use App\Medicine;
 use App\ExpenseFor;
-use App\WholeSaleMedicine;
-use App\RetailSaleChild;
+use App\WholeSaleDetail;
+use App\RetailSale;
 use App\Stock;
 
 class AdminController extends Controller
@@ -29,11 +29,18 @@ class AdminController extends Controller
         return view('Admin.index');
     }
 
+    public function stock_data()
+    {
+        $customer = Stock::where('stock_status', 'Active')->count('batch_id');
+        return response()->json($customer, 200);
+    }
+
     public function customer_data()
     {
         $customer = Customer::where('customer_status', 'Active')->count();
         return response()->json($customer, 200);
     }
+
 
     public function company_data()
     {
@@ -56,15 +63,21 @@ class AdminController extends Controller
     public function expire_data()
     {
         $c_date=date('Y-m-d');
-        $expire = Stock::where('expire_date', $c_date)->where('stock_status', 'Active')->count();
+        $expire = Stock::where('expire_date', $c_date)->where('stock_status', 'Deactivate')->count();
+        return response()->json($expire, 200);
+    }
+
+    public function outstock_data()
+    {
+        $expire = Stock::where('medicine_code', )->where('stock_status', 'Active')->count();
         return response()->json($expire, 200);
     }
 
     public function invoice_data()
     {
-        $whole_sale_invoice = WholeSaleMedicine::count('invoice_id');
-        $retail_sale_invoice = RetailSaleChild::count('invoice_id');
-        $total_invoice = $whole_sale_invoice+$retail_sale_invoice;
+        $whole_sale_invoice = WholeSaleDetail::count('invoice_id');
+        $retail_sale_invoice = RetailSale::count('invoice_id');
+        $total_invoice = ($whole_sale_invoice+$retail_sale_invoice);
         return response()->json($total_invoice, 200);
     }
 

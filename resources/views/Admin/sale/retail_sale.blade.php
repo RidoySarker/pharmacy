@@ -56,6 +56,7 @@
 							      </div>
 							    </div>
 							    <div class="stock_message"></div>
+							    <input type="hidden" id="totalstock">
 							 </div>
 							<div style="display: inline-flex; margin-left: -14px;">
 							    <div class="title">Medicine Name</div>
@@ -194,34 +195,42 @@
 		$.ajax({
 			url: "/all_medicine/"+medicine_code,
 			success: function(data) {
-				if(data.total_stock>0) {
-					var totalstock = data.total_stock;
-					row.find(".price").val(data.retail_price);
-					$(".stock_message").html("<font id='stoks' style='color:green;font-size: 25px;'>"+data.total_stock+" Medicine in Stock</font>")
+				var totalstock = Object.keys(data).length;
+				$("#totalstock").val(totalstock);
+				if(totalstock>0) {
+					row.find(".price").val(data[0].retail_price);
+					$(".stock_message").html("<font id='stoks' style='color:green;font-size: 25px;'>"+totalstock+" Medicine in Stock</font>")
 				} else {
-					$(".stock_message").html("<font style='color:red;font-size: 25px;'>Medicine is Out of Stock</font>")
+					$(".stock_message").html("<font style='color:red;font-size: 25px;'>Medicine Out of Stock</font>")
 				}
 			}
 		});
 	});
 
-	$(document).on("keyup",".quantity", function(){
+	$(document).on("keyup", ".quantity", function() {
+		var totalstock = parseInt($("#totalstock").val());
 		var quantity = $(this).val();
-		var price = $(this).closest("tr").find(".price").val();
-		var sub_total= parseInt(quantity*price);
-		$(this).closest("tr").find(".sub_total").val(sub_total);
-		var total = 0;
-		$(".sub_total").each(function() {
-			var value = parseInt($(this).val());
-			total = parseInt(total+value)
-			$(".grandTotal").val(total);
-		});
+		if (quantity <= totalstock) {
+			$(".submit").attr("disabled", false);
+			var price = $(this).closest("tr").find(".price").val();
+			var sub_total = parseInt(quantity*price);
+			$(this).closest("tr").find(".sub_total").val(sub_total);
+			var total = 0;
+			$(".sub_total").each(function() {
+				var value = parseInt($(this).val());
+				total = parseInt(total+value)
+				$(".grandTotal").val(total);
+			});
+		} 
+		else {
+			$(".submit").attr("disabled", true);
+		}
+		
 	});
 
 	$(document).on("submit", "#form", function(e) {
 		e.preventDefault();
 		var data = $(this).serializeArray();
-		
 		$.ajax({
 			url		: "retail_sale/store",
 			data 	: data,

@@ -23,9 +23,40 @@ class StockController extends Controller
 
     public function out_of_stock()
     {
-        $stock_data['stock_data'] = Stock::where('total_stock', '=', 0)->get();
+        $stock_data['stock_data'] = Stock::where('stock_status', '=', 'Deactivate')->get();
         return view('Admin.stock.out_of_stock',$stock_data);
     }
+
+
+    public function stock_report()
+    {
+        
+        $data['stock_data'] = Stock::get();
+        $data['medicine_data'] = Medicine::get();
+        return view('Admin.stock.stock_report',$data);
+    }
+
+    public function medicine_data()
+    {
+        $medicine_data = Medicine::get();
+        return view('Admin.stock.medicine_list',['medicine_list'=>$medicine_data]);
+    }
+
+    public function medicine_report($name)
+    {
+        $report_data = Purcase::where('medicine_code',$name)->get();
+        $stock_report = Stock::where('medicine_code',$name)->where('stock_status' , 'Active')->get();
+        return view('Admin.stock.medicine_report',['report_data'=>$report_data,'stock_report'=>$stock_report]);
+    }
+
+
+
+
+
+
+
+
+
     /**
      * Show the form for creating a new resource.
      *

@@ -37,28 +37,27 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($stock_data as $key => $value)
+                  @foreach($medicine_data as $key => $value)
+                  @php
+
+                  $stock = collect($stock_data)->where('medicine_code',$value->medicine_code)->count();
+                  @endphp
                   <tr> 
                     <td>{{$key+1}}</td>
                     <td>{{$value->company_name}}</td>
                     <td>{{$value->medicine_name}}</td>
                     <td>
-                      @if($value->total_stock>0)
-                        @if($value->total_stock>10)
-                        <span style="color: green;">{{$value->total_stock}}</span>
-                        @else
-                        <span style="color: red;">{{$value->total_stock}}</span>
-                        @endif
+                      @if($stock>10)
+                        <span style="color: green">{{$stock}}</span>
                       @else
-                        <span style="color: red;">Out Of Stock</span>
+                         <span style="color: red">{{$stock}}</span>
                       @endif
-
                     </td>
                   </tr>
                   @endforeach
                 </tbody>
           <td colspan="4" class="text-center" style="font-size: 30px;color: green;">
-            Total Stock : {{collect($stock_data)->sum('total_stock')}}
+                Total Stock : {{$stock_data ? collect($stock_data)->count('batch_id') :'NOT PURCASE YET'}}
           </td>
               </table>
             </div>

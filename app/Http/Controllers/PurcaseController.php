@@ -7,6 +7,7 @@ use App\Company;
 use App\Medicine;
 use App\Stock;
 use Illuminate\Http\Request;
+use Validator;
 
 class PurcaseController extends Controller
 {
@@ -52,44 +53,43 @@ class PurcaseController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'date'          => 'required',
-            'company_name'  => 'required',
-            'medicine_code' => 'required',
-            'quantity'      => 'required',
-            'sub_total'     => 'required',
-            'grand_total'   => 'required',
-            'pay'           => 'required',
-            'rest'          => 'required',
-        ]);
-
-        $data = [
-            'date'          => $request->date,
-            'batch_id'      => $request->batch_id,
-            'expire_date'   => $request->expire_date,
-            'company_name'  => $request->company_name,
-            'medicine_code' => $request->medicine_code,
-            'quantity'      => $request->quantity,
-            'sub_total'     => $request->sub_total,
-            'grand_total'   => $request->grand_total,
-            'pay'           => $request->pay,
-            'rest'          => $request->rest,
-        ];
-        Purcase::create($data);
-        for ($i=0; $i<($request->quantity); $i++) { 
-            $stock = new Stock;
-            $stock->batch_id = $request->batch_id;
-            $stock->medicine_code = $request->medicine_code;
-            $stock->expire_date = $request->expire_date;
-            $stock->stock_status = $request->stock_status;
-            $stock->save();
+        $purcaseModel = new Purcase;
+        $validate = Validator::make($request->all(),$purcaseModel->validation(),$purcaseModel->message());
+        if($validate->fails())
+        {
+            return response()->json(['error'=>$validate->errors()->all()]);
         }
-
+        $PurcaseCount=count($request->medicine_code);
+        for ($i=0; $i <$PurcaseCount ; $i++) { 
+            
+            $insert[]=[
+                'date'          => $request->date,
+                'batch_id'      => $request->batch_id,
+                'expire_date'   => $request->expire_date[$i],
+                'company_name'  => $request->company_name[$i],
+                'medicine_code' => $request->medicine_code[$i],
+                'quantity'      => $request->quantity[$i],
+                'sub_total'     => $request->sub_total[$i],
+                'grand_total'   => $request->grand_total,
+                'pay'           => $request->pay,
+                'rest'          => $request->rest,
+            ];
+            for ($a=0; $a<($request->quantity[$i]); $a++) { 
+                $stock[] =[
+                    'batch_id' => $request->batch_id,
+                    'medicine_code' => $request->medicine_code[$i],
+                    'expire_date' => $request->expire_date[$i],
+                    'stock_status' => $request->stock_status
+                ];
+            }
+        }
+        Stock::insert($stock);
+        Purcase::insert($insert);
         $response = [
             'msgtype' => 'success',
             'message' => 'Purcase Successfully',
         ];
-        echo json_encode($response);
+        return response()->json($response , 200);      
     }
 
     /**
@@ -99,25 +99,6 @@ class PurcaseController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function stock_report()
-    {
-        
-        $data = Medicine::join('stocks','stocks.medicine_code','=','medicines.medicine_code')->get();
-        return view('Admin.stock.stock_report',['stock_data'=>$data]);
-    }
-
-    public function medicine_data()
-    {
-        $medicine_data = Medicine::get();
-        return view('Admin.stock.medicine_list',['medicine_list'=>$medicine_data]);
-    }
-
-    public function medicine_report($name)
-    {
-        $report_data = Purcase::where('medicine_code',$name)->get();
-        $stock_report = Stock::where('medicine_code',$name)->first();
-        return view('Admin.stock.medicine_report',['report_data'=>$report_data,'stock_report'=>$stock_report]);
-    }
 
 
     public function show(Purcase $purcase)

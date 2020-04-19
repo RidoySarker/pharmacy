@@ -27,6 +27,7 @@ Route::get('/home', function () {
     return Redirect::to('admin');
 });
 //Dashboard_Data
+Route::get('/stock_data', 'AdminController@stock_data');
 Route::get('/customer_data', 'AdminController@customer_data');
 Route::get('/company_data', 'AdminController@company_data');
 Route::get('/medicine_data', 'AdminController@medicine_data');
@@ -74,9 +75,9 @@ Route::post('purcase/store', 'PurcaseController@store');
 Route::post('purcase/update', 'PurcaseController@update');
 Route::get('/rest_report', 'PurcaseController@rest_report');
 //Stock_Report
-Route::get('stock_report', 'PurcaseController@stock_report');
-Route::get('medicine_report', 'PurcaseController@medicine_data');
-Route::get('medicine_report/{name}', 'PurcaseController@medicine_report');
+Route::get('stock_report', 'StockController@stock_report');
+Route::get('medicine_report', 'StockController@medicine_data');
+Route::get('medicine_report/{name}', 'StockController@medicine_report');
 Route::get('/expire_date', 'StockController@index');
 Route::get('/out_of_stock', 'StockController@out_of_stock');
 //Whole_Sale

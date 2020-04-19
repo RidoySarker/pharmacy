@@ -43,16 +43,6 @@
                             </tr>
                             @endforeach
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Date</th>
-                                <th>Invoice Id</th>
-                                <th>Customer Name</th>
-                                <th>Grand Total</th>
-                                <th>Payment</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
             </div>

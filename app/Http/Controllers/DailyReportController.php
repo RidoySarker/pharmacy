@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\WholeSaleDetail;
 use App\WholeSaleMedicine;
 use App\Medicine;
+use App\RetailSale;
+use App\ExpenseFor;
 
 class DailyReportController extends Controller
 {
@@ -17,9 +19,10 @@ class DailyReportController extends Controller
     public function index()
     {
         $c_date=date('Y-m-d');
-        $today_w_s = WholeSaleDetail::where('date', $c_date)->get();
-
-        return view('Admin.report.daily_report', ['today_w_s' => $today_w_s]);
+        $data ['today_w_s'] = WholeSaleDetail::where('date', $c_date)->get();
+        $data ['today_r_s'] = RetailSale::where('date', $c_date)->get();
+        $data ['expense'] = ExpenseFor::where('expense_date', $c_date)->get();
+        return view('Admin.report.daily_report',$data);
     }
     public function whole_data(Request $request)
     {

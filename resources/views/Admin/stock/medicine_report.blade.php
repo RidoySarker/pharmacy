@@ -60,7 +60,7 @@
 	              @endforeach
                 </tbody>
 					<td colspan="8" class="text-center" style="font-size: 30px;color: green;">
-						Total Stock : {{$stock_report ? $stock_report->total_stock :'NOT PURCASE YET'}}
+						Total Stock : {{$stock_report ? collect($stock_report)->count('batch_id') :'NOT PURCASE YET'}}
 					</td>
               </table>
             </div>

@@ -24,7 +24,6 @@
                     <th>Medicine Name</th>
 	                  <th>Company Name</th>
 	                  <th>Medicine Code</th>
-	                  <th>Stock</th>
 	                </tr>
                 </thead>
                 <tbody>
@@ -37,7 +36,7 @@
 	                <td>{{$medicine_data->medicine_name}}</td>
 					         <td>{{$medicine_data->company_name}}</td>
 	                <td>{{$medicine_data->medicine_code}}</td>
-	                <td>{{$value->total_stock}}</td>
+	                
 	                </tr>
 	                @endforeach
                 </tbody>

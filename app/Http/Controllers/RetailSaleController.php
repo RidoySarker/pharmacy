@@ -28,7 +28,7 @@ class RetailSaleController extends Controller
      */
     public function all_medicine($medicine)
     {
-        $medicine = Medicine::join('stocks','stocks.medicine_code','=','medicines.medicine_code')->where('medicines.medicine_code',$medicine)->first();
+        $medicine = Medicine::join('stocks','stocks.medicine_code','=','medicines.medicine_code')->where('medicines.medicine_code',$medicine)->where('stock_status', 'Active')->get();
         return response()->json($medicine, 200);
     }
 

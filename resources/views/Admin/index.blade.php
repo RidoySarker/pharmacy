@@ -23,7 +23,7 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3></h3>
+                        <h3 id="stockdata"></h3>
 
                         <p>Total Stock</p>
                     </div>
@@ -100,7 +100,8 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3 id="invoice"></h3>
+                        <h3 id="invoicedata"></h3>
+
                         <p>Total Invoice</p>
                     </div>
                     <div class="icon">
@@ -132,12 +133,27 @@
 @section('script')
 <script type="text/javascript">
     $(document).ready(function() {
+        getStock();
         getCustomer();
         getCompany();
         getMedicine();
         getExpense();
         getExpire();
         getInvoice();
+
+        function getStock() {
+            
+            $.ajax({
+                url: "/stock_data",
+                type: "get",
+                cache: false,
+                datatype: "html",
+                success: function(data) {
+                    $("#stockdata").html(data);
+                }
+            });
+
+        }
 
         function getCustomer() {
             
@@ -203,7 +219,7 @@
                 cache: false,
                 datatype: "html",
                 success: function(data) {
-                    $("#invoice").html(data);
+                    $("#invoicedata").html(data);
                 }
             });
 
