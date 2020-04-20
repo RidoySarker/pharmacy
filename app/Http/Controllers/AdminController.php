@@ -63,7 +63,7 @@ class AdminController extends Controller
     public function expire_data()
     {
         $c_date=date('Y-m-d');
-        $expire = Stock::where('expire_date', $c_date)->where('stock_status', 'Deactivate')->count();
+        $expire = Stock::where('expire_date', '<=', $c_date)->where('stock_status', 'Deactivated')->count();
         return response()->json($expire, 200);
     }
 

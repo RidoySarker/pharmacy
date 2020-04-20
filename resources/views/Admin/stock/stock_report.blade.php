@@ -40,7 +40,7 @@
                   @foreach($medicine_data as $key => $value)
                   @php
 
-                  $stock = collect($stock_data)->where('medicine_code',$value->medicine_code)->count();
+                  $stock = collect($stock_data)->where('medicine_code',$value->medicine_code)->where('stock_status', 'Active')->count();
                   @endphp
                   <tr> 
                     <td>{{$key+1}}</td>
@@ -57,7 +57,7 @@
                   @endforeach
                 </tbody>
           <td colspan="4" class="text-center" style="font-size: 30px;color: green;">
-                Total Stock : {{$stock_data ? collect($stock_data)->count('batch_id') :'NOT PURCASE YET'}}
+                Total Stock : {{$stock_data ? collect($stock_data)->where('stock_status', 'Active')->count('batch_id') :'NOT PURCASE YET'}}
           </td>
               </table>
             </div>

@@ -3,10 +3,9 @@
 @section('content')
 <div class="card">
 	<div class="card-header">
-	                  <h4><b style="color: #343a40"><i class="btn-outline-success far fa-clipboard fa-2x"></i> Stock</b></h4>	
-	                  <span style="margin-left: 45px;">Out Of Stock</span>
+    <h4><b style="color: #343a40"><i class="btn-outline-success far fa-clipboard fa-2x"></i> Out Of Stock</b></h4>
 
-	                </div>
+  </div>
 </div>
 
     <section class="content">
@@ -27,17 +26,13 @@
 	                </tr>
                 </thead>
                 <tbody>
-	             @foreach($stock_data as $key => $value)
-	             @php $medicine_data=DB::table('medicines')->where('medicine_code',$value->medicine_code)->first(); 
-
-	             @endphp
-	              <tr>
-	                <td>{{$key+1}}</td>
-	                <td>{{$medicine_data->medicine_name}}</td>
-					         <td>{{$medicine_data->company_name}}</td>
-	                <td>{{$medicine_data->medicine_code}}</td>
-	                
-	                </tr>
+    	            @foreach($medicine as $key => $value)
+  	              <tr>
+  	                <td>{{$key+1}}</td>
+  	                <td>{{$value->medicine_name}}</td>
+  					        <td>{{$value->company_name}}</td>
+  	                <td>{{$value->medicine_code}}</td>	                
+                  </tr>
 	                @endforeach
                 </tbody>
               </table>
@@ -46,16 +41,6 @@
         </div>
       </div>
     </section>
-</div>
-
-<div id="editModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div id="edit_form"></div>
-
-    </div>
-  </div>
 </div>
 @stop
 @section('script')
