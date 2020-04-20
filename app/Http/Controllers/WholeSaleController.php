@@ -60,7 +60,7 @@ class WholeSaleController extends Controller
         for ( $i = 0; $i< $_count_medicine; $i++ ) { 
             $stock = Stock::where('medicine_code', $request->medicine_code[$i])->where('stock_status', 'Active')
                 ->limit($request->quantity[$i]);
-            $stock->update(['stock_status' => 'Deactivate']);
+            $stock->update(['stock_status' => 'Sold']);
             $whole_sale_medicine = new WholeSaleMedicine;
             $whole_sale_medicine->invoice_id = $request->invoice_id;
             $whole_sale_medicine->medicine_code = $request->medicine_code[$i];

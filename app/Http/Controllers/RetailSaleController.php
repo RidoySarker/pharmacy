@@ -63,7 +63,7 @@ class RetailSaleController extends Controller
         for ($i=0; $i<count($request->medicine_code); $i++) { 
             $stock = Stock::where('medicine_code', $request->medicine_code[$i])->where('stock_status', 'Active')
                 ->limit($request->quantity[$i]);
-            $stock->update(['stock_status' => 'Deactivate']);
+            $stock->update(['stock_status' => 'Sold']);
             $retail_sale_medicine = new RetailSaleChild;
             $retail_sale_medicine->invoice_id = $request->invoice_id;
             $retail_sale_medicine->medicine_code = $request->medicine_code[$i];

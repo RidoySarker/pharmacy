@@ -23,7 +23,8 @@ class StockController extends Controller
 
     public function out_of_stock()
     {
-        $stock_data['stock_data'] = Stock::where('stock_status', '=', 'Deactivate')->get();
+        $stock_data['medicine'] = Medicine::get();
+        $stock_data['stock_data'] = Stock::join('medicines', 'medicines.medicine_code', '=', 'stocks.medicine_code')->where('stock_status', '=', 'Active')->get();
         return view('Admin.stock.out_of_stock',$stock_data);
     }
 
