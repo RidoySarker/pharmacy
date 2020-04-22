@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="card-body">
-            
+
             <div id="DataList"></div>
 
           </div>
@@ -96,38 +96,57 @@
     e.preventDefault();
     var data = $(this).serializeArray();
 
+
     $.ajax({
       url     : "catagory/store",
       data    : data,
       type    : "post",
       dataType: "json",
       success: function(data) {
-        if (data.msgtype=='success') {
-          toastr["success"](data.message);
-          $("#addModal").modal("hide");
-          loadTableData(); 
-        } else {
-          toastr["error"]("Something Went Wrong");
-        }
+        $("#addModal").modal("hide");
+        toastr["success"]("Category Added Succesfully");
+        loadTableData();
       }, error:function(errors) {
-          var text=errors.responseText;
-          var error=JSON.parse(text);
-          $("#modal_form").find(".alert-danger").remove();
-          $("#modal_form").find(".modal-body").prepend("<div class='alert alert-danger'>"+error.message+"</div>");
-          $("#modal_form").find('.form-group').each(function(){
-            var $that =$(this);
-            $(this).find('.help-block').remove();
-            var inputName=$(this).find('[name]').first().attr('name');
-            if(error.errors[inputName])
-            {
-              $.each(error.errors[inputName],function(i,message){
-                $that.append('<span class="help-block" style="color:red;">'+message+'</span>');
-              })
-            }
-          });
-
-      }      
+           let error = JSON.parse(errors.responseText).errors;
+           $.each(error,function(i,message){
+                $("#"+i+"_error").html('<span class="help-block" style="color:red;">'+message+'</span>');
+           })
+      }
     });
+
+    // $.ajax({
+    //   url     : "catagory/store",
+    //   data    : data,
+    //   type    : "post",
+    //   dataType: "json",
+    //   success: function(data) {
+    //     if (data.msgtype=='success') {
+    //       toastr["success"](data.message);
+    //       $("#addModal").modal("hide");
+    //       loadTableData();
+    //     } else {
+    //       toastr["error"]("Something Went Wrong");
+    //     }
+    //   }, error:function(errors) {
+    //       var text=errors.responseText;
+    //       var error=JSON.parse(text);
+    //       $("#modal_form").find(".alert-danger").remove();
+    //       $("#modal_form").find(".modal-body").prepend("<div class='alert alert-danger'>"+error.message+"</div>");
+    //       $("#modal_form").find('.form-group').each(function(){
+    //         var $that =$(this);
+    //         $(this).find('.help-block').remove();
+    //         var inputName=$(this).find('[name]').first().attr('name');
+    //         if(error.errors[inputName])
+    //         {
+    //           $.each(error.errors[inputName],function(i,message){
+    //             $that.append('<span class="help-block" style="color:red;">'+message+'</span>');
+    //           })
+    //         }
+    //       });
+
+    //   }
+    // });
+
   });
   //Edit_Modal
   $(document).on("click", ".edit", function() {
@@ -166,7 +185,7 @@
           var error=JSON.parse(text);
           $("#edit_form").find(".alert-danger").remove();
           $("#edit_form").find(".modal-body").prepend("<div class='alert alert-danger'>"+error.message+"</div>");
-      } 
+      }
     });
   });
   //Delete
@@ -195,7 +214,7 @@
             }
           }
         });
-        } else { 
+        } else {
             swal("Your Data is safe!");
         }
      });

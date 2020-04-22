@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Catagory;
 use Illuminate\Http\Request;
-use Toastr;
 use Validator;
 
 class CatagoryController extends Controller
@@ -21,31 +20,30 @@ class CatagoryController extends Controller
 
     public function catagoryData(Request $request)
     {
-        $data['perPage'] = $perPage =$request->input('perPage',10);
-        $page = $request->input('page',1);
+
+        $data['perPage'] = $perPage = $request->input('perPage', 10);
+        $page = $request->input('page', 1);
         $data['search'] = $search = $request->search;
-        $data['sl'] =(($page-1)*$perPage)+1;
-        $sortingClick =$request->sortingClick;
+        $data['sl'] = (($page - 1) * $perPage) + 1;
+        $sortingClick = $request->sortingClick;
         $sorting = $request->sorting;
         $data['sortingClick'] = $sortingClick;
         $data['sorting'] = $sorting;
-        $sortingfield=["catagory_name","catagory_description","catagory_status"];
-        if($sorting>0)
-        {
-          $sorting=$sortingfield[$sorting-1];
+        $sortingfield = ["catagory_name", "catagory_description", "catagory_status"];
+        if ($sorting > 0) {
+            $sorting = $sortingfield[$sorting - 1];
+        } else {
+            $sorting = "catagory_id";
+            $sortingClick = "desc";
         }
-        else{
-          $sorting= "catagory_id";
-          $sortingClick = "desc";
-        }
-        $data['category'] = Catagory::when($search,function($query) use ($search){
-        $query
-        ->where('catagory_name','like',"%$search%")
-            ->orWhere('catagory_description','like',"%{$search}%")
-            ->orWhere('catagory_status','like',"%{$search}%");
+        $data['category'] = Catagory::when($search, function ($query) use ($search) {
+            $query
+                ->where('catagory_name', 'like', "%$search%")
+                ->orWhere('catagory_description', 'like', "%{$search}%")
+                ->orWhere('catagory_status', 'like', "%{$search}%");
         })
-        ->orderBy($sorting, $sortingClick)
-        ->paginate($perPage);
+            ->orderBy($sorting, $sortingClick)
+            ->paginate($perPage);
         return view('Admin.medicine.category.list', $data);
     }
 
@@ -67,22 +65,42 @@ class CatagoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'catagory_name'        => 'required',
-            'catagory_description' => 'required',
-            'catagory_status'      => 'required',
-        ]);
-        $data = [
-            'catagory_name'        => $request->catagory_name,
-            'catagory_description' => $request->catagory_description,
-            'catagory_status'      => $request->catagory_status,
-        ];
-        Catagory::create($data);
-        $response = [
-            'msgtype' => 'success',
-            'message' => 'Category Add Successfully',
-        ];
-        echo json_encode($response);
+
+        $categoryModel = new Catagory;
+        $validation = Validator::make($request->all(), $categoryModel->validation());
+        if ($validation->fails()) {
+            $status = 400;
+            $response = [
+                "status" => $status,
+                "errors" => $validation->errors(),
+            ];
+        } else {
+            $categoryModel->fill($request->all())->save();
+            $status = 201;
+            $response = [
+                "status" => $status,
+                "data" => $categoryModel,
+            ];
+
+        }
+        return response()->json($response, $status);
+        // $request->validate([
+        //     'catagory_name'        => 'required',
+        //     'catagory_description' => 'required',
+        //     'catagory_status'      => 'required',
+        // ]);
+        // $data = [
+        //     'catagory_name'        => $request->catagory_name,
+        //     'catagory_description' => $request->catagory_description,
+        //     'catagory_status'      => $request->catagory_status,
+        // ];
+        // Catagory::create($data);
+        // $response = [
+        //     'msgtype' => 'success',
+        //     'message' => 'Category Add Successfully',
+        // ];
+
+        //echo json_encode($response);
     }
 
     /**
@@ -118,14 +136,14 @@ class CatagoryController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'catagory_name'        => 'required',
+            'catagory_name' => 'required',
             'catagory_description' => 'required',
-            'catagory_status'      => 'required',
+            'catagory_status' => 'required',
         ]);
         $data = [
-            'catagory_name'        => $request->catagory_name,
+            'catagory_name' => $request->catagory_name,
             'catagory_description' => $request->catagory_description,
-            'catagory_status'      => $request->catagory_status,
+            'catagory_status' => $request->catagory_status,
         ];
         $id = $request->catagory_id;
         Catagory::where('catagory_id', $id)->update($data);
