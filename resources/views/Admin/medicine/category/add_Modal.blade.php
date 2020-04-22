@@ -3,10 +3,12 @@
       <div class="form-group">
         <label>Category Name</label>
         <input type="text" class="form-control" placeholder="Enter Category Name" id="catagory_name" name="catagory_name">
+        <span id="catagory_name_error"></span>
       </div>
       <div class="form-group">
         <label>Category Description</label>
         <input type="text" class="form-control" placeholder="Enter Category Description" id="catagory_description" name="catagory_description">
+        <span id="catagory_description_error"></span>
       </div>
       <div class="form-group">
         <label>Category Status</label>

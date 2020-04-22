@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Customer;
 use App\Company;
-use App\Medicine;
+use App\Customer;
 use App\ExpenseFor;
-use App\WholeSaleDetail;
+use App\Medicine;
 use App\RetailSale;
 use App\Stock;
+use App\WholeSaleDetail;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -23,7 +23,7 @@ class AdminController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         return view('Admin.index');
@@ -40,7 +40,6 @@ class AdminController extends Controller
         $customer = Customer::where('customer_status', 'Active')->count();
         return response()->json($customer, 200);
     }
-
 
     public function company_data()
     {
@@ -62,14 +61,14 @@ class AdminController extends Controller
 
     public function expire_data()
     {
-        $c_date=date('Y-m-d');
+        $c_date = date('Y-m-d');
         $expire = Stock::where('expire_date', '<=', $c_date)->where('stock_status', 'Deactivated')->count();
         return response()->json($expire, 200);
     }
 
     public function outstock_data()
     {
-        $expire = Stock::where('medicine_code', )->where('stock_status', 'Active')->count();
+        $expire = Stock::where('stock_status', 'Sold')->count();
         return response()->json($expire, 200);
     }
 
@@ -77,10 +76,9 @@ class AdminController extends Controller
     {
         $whole_sale_invoice = WholeSaleDetail::count('invoice_id');
         $retail_sale_invoice = RetailSale::count('invoice_id');
-        $total_invoice = ($whole_sale_invoice+$retail_sale_invoice);
+        $total_invoice = ($whole_sale_invoice + $retail_sale_invoice);
         return response()->json($total_invoice, 200);
     }
-
 
     /**
      * Show the form for creating a new resource.
