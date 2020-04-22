@@ -14,8 +14,38 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $Customer['customer'] = Customer::orderBy('customer_id','desc')->get();
-        return view('Admin.customer.customer',$Customer);
+        return view('Admin.customer.customer');
+    }
+
+    public function customerData(Request $request)
+    {
+        $data['perPage'] = $perPage =$request->input('perPage',10);
+        $page = $request->input('page',1);
+        $data['search'] = $search = $request->search;
+        $data['sl'] =(($page-1)*$perPage)+1;
+        $sortingClick =$request->sortingClick;
+        $sorting = $request->sorting;
+        $data['sortingClick'] = $sortingClick;
+        $data['sorting'] = $sorting;
+        $sortingfield=["customer_name","customer_phone","customer_address","customer_status"];
+        if($sorting>0)
+        {
+          $sorting=$sortingfield[$sorting-1];
+        }
+        else{
+          $sorting= "customer_id";
+          $sortingClick = "desc";
+        }
+        $data['customer'] = Customer::when($search,function($query) use ($search){
+        $query
+        ->where('customer_name','like',"%$search%")
+            ->orWhere('customer_phone','like',"%{$search}%")
+            ->orWhere('customer_address','like',"%{$search}%")
+            ->orWhere('customer_status','like',"%{$search}%");
+        })
+        ->orderBy($sorting, $sortingClick)
+        ->paginate($perPage);
+        return view('Admin.customer.list', $data);
     }
 
     /**

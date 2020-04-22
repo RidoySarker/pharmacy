@@ -15,8 +15,37 @@ class ExpenseForController extends Controller
     
     public function index()
     {
-        $ExpenseFor['expensefor'] = ExpenseFor::orderBy('expense_for_id','desc')->get();
-        return view('Admin.expense.expense_for.expense_for',$ExpenseFor);
+        return view('Admin.expense.expense_for.expense_for');
+    }
+
+    public function expense_forData(Request $request)
+    {
+        $data['perPage'] = $perPage =$request->input('perPage',10);
+        $page = $request->input('page',1);
+        $data['search'] = $search = $request->search;
+        $data['sl'] =(($page-1)*$perPage)+1;
+        $sortingClick =$request->sortingClick;
+        $sorting = $request->sorting;
+        $data['sortingClick'] = $sortingClick;
+        $data['sorting'] = $sorting;
+        $sortingfield=["expense_name","expense_cost","expense_date"];
+        if($sorting>0)
+        {
+          $sorting=$sortingfield[$sorting-1];
+        }
+        else{
+          $sorting= "expense_for_id";
+          $sortingClick = "desc";
+        }
+        $data['expensefor'] = ExpenseFor::when($search,function($query) use ($search){
+        $query
+        ->where('expense_name','like',"%$search%")
+            ->orWhere('expense_cost','like',"%{$search}%")
+            ->orWhere('expense_date','like',"%{$search}%");
+        })
+        ->orderBy($sorting, $sortingClick)
+        ->paginate($perPage);
+        return view('Admin.expense.expense_for.list', $data);
     }
 
     /**

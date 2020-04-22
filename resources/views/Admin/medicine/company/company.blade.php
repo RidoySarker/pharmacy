@@ -32,8 +32,8 @@
                 <div style="margin-left: 293px;">
                   <label>Search:<input name="search" id="search" class="form-control input-sm" placeholder="" aria-controls="example1">
                   </label>
+                </div>
               </div>
-            </div>
             </div>
             <div class="card-body">
 

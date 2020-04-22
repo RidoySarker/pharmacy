@@ -14,8 +14,37 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $Expense['expense'] = Expense::orderBy('expense_catagory_id','desc')->get();
-        return view('Admin.expense.expense_category.expense_category',$Expense);
+        return view('Admin.expense.expense_category.expense_category');
+    }
+
+    public function expense_catagoryData(Request $request)
+    {
+        $data['perPage'] = $perPage =$request->input('perPage',10);
+        $page = $request->input('page',1);
+        $data['search'] = $search = $request->search;
+        $data['sl'] =(($page-1)*$perPage)+1;
+        $sortingClick =$request->sortingClick;
+        $sorting = $request->sorting;
+        $data['sortingClick'] = $sortingClick;
+        $data['sorting'] = $sorting;
+        $sortingfield=["expense_name","expense_description","expense_status"];
+        if($sorting>0)
+        {
+          $sorting=$sortingfield[$sorting-1];
+        }
+        else{
+          $sorting= "expense_catagory_id";
+          $sortingClick = "desc";
+        }
+        $data['expense'] = Expense::when($search,function($query) use ($search){
+        $query
+        ->where('expense_name','like',"%$search%")
+            ->orWhere('expense_description','like',"%{$search}%")
+            ->orWhere('expense_status','like',"%{$search}%");
+        })
+        ->orderBy($sorting, $sortingClick)
+        ->paginate($perPage);
+        return view('Admin.expense.expense_category.list', $data);
     }
 
     /**
