@@ -17,8 +17,42 @@ class MedicineController extends Controller
      */
     public function index()
     {
-        $medicine = Medicine::orderBy('medicine_id', 'desc')->get();
-        return view('Admin.medicine.medicine.medicine', ['medicine' => $medicine]);
+        return view('Admin.medicine.medicine.medicine');
+    }
+
+    public function medicineTable(Request $request)
+    { 
+      $data['perPage'] = $perPage =$request->input('perPage',10);
+      $page = $request->input('page',1);
+      $data['search'] = $search = $request->search;
+      $data['sl'] =(($page-1)*$perPage)+1;
+      $sortingClick =$request->sortingClick;
+      $sorting = $request->sorting;
+      $data['sortingClick'] = $sortingClick;
+      $data['sorting'] = $sorting;
+      $sortingfield=["medicine_id","medicine_name","company_name","purcase_price","retail_price","whole_sell_price"];
+      if($sorting>0)
+      {
+        $sorting=$sortingfield[$sorting-1];
+      }
+      else{
+        $sorting= "medicine_id";
+        $sortingClick = "desc";
+      }
+        $data['medicine'] = Medicine::when($search,function($query) use ($search){
+        $query
+        ->where('medicine_code','like',"%$search%")
+            ->orWhere('medicine_name','like',"%{$search}%")
+            ->orWhere('catagory','like',"%{$search}%")
+            ->orWhere('company_name','like',"%{$search}%")
+            ->orWhere('desk_name','like',"%{$search}%")
+            ->orWhere('purcase_price','like',"%{$search}%")
+            ->orWhere('retail_price','like',"%{$search}%")
+            ->orWhere('whole_sell_price','like',"%{$search}%");
+        })
+        ->orderBy($sorting, $sortingClick)
+        ->paginate($perPage);
+        return view('Admin.medicine.medicine.medicineTable',$data);
     }
 
     /**
@@ -71,7 +105,7 @@ class MedicineController extends Controller
             'msgtype' => 'success',
             'message' => 'Medicine Add Successfully',
         ];
-        echo json_encode($response);
+        return response()->json($response, 200);
     }
 
     /**
@@ -80,9 +114,13 @@ class MedicineController extends Controller
      * @param  \App\Medicine  $medicine
      * @return \Illuminate\Http\Response
      */
-    public function show(Medicine $medicine)
+    public function show($id)
     {
-        //
+        $medicine = Medicine::findOrFail($id);
+        $desk = Desk::get();
+        $catagory = Catagory::where('catagory_status', 'Active')->get();
+        $company = Company::where('company_status', 'Active')->get();
+        return view('Admin.medicine.medicine.show_Modal', ['medicine' => $medicine, 'desk' => $desk, 'catagory' => $catagory, 'company' => $company]);
     }
 
     /**

@@ -14,8 +14,40 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $company = Company::orderBy('company_id', 'desc')->get();
-        return view('Admin.medicine.company.company', ['company' => $company]);
+        return view('Admin.medicine.company.company');
+    }
+
+    public function companyData(Request $request)
+    {
+        
+      $data['perPage'] = $perPage =$request->input('perPage',10);
+      $page = $request->input('page',1);
+      $data['search'] = $search = $request->search;
+      $data['sl'] =(($page-1)*$perPage)+1;
+      $sortingClick =$request->sortingClick;
+      $sorting = $request->sorting;
+      $data['sortingClick'] = $sortingClick;
+      $data['sorting'] = $sorting;
+      $sortingfield=["company_name","company_phone","company_email","company_address","company_status"];
+      if($sorting>0)
+      {
+        $sorting=$sortingfield[$sorting-1];
+      }
+      else{
+        $sorting= "company_id";
+        $sortingClick = "desc";
+      }
+        $data['company'] = Company::when($search,function($query) use ($search){
+        $query
+        ->where('company_name','like',"%$search%")
+            ->orWhere('company_phone','like',"%{$search}%")
+            ->orWhere('company_email','like',"%{$search}%")
+            ->orWhere('company_address','like',"%{$search}%")
+            ->orWhere('company_status','like',"%{$search}%");
+        })
+        ->orderBy($sorting, $sortingClick)
+        ->paginate($perPage);
+        return view('Admin.medicine.company.companyList',$data);
     }
 
     /**
@@ -55,7 +87,7 @@ class CompanyController extends Controller
             'msgtype' => 'success',
             'message' => 'Company Add Successfully',
         ];
-        echo json_encode($response);
+        return response()->json($response, 200);
     }
 
     /**

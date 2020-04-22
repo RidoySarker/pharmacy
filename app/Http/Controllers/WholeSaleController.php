@@ -17,6 +17,7 @@ class WholeSaleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $medicine = Medicine::where('medicine_status', 'Active')->get();

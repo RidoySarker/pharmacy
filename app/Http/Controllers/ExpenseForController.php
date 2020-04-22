@@ -12,6 +12,7 @@ class ExpenseForController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         $ExpenseFor['expensefor'] = ExpenseFor::orderBy('expense_for_id','desc')->get();

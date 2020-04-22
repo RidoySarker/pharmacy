@@ -30,8 +30,7 @@
                 <tbody>
 	             @foreach($expire_data as $key => $value)
 	             @php $medicine_data=DB::table('medicines')->where('medicine_code',$value->medicine_code)->first(); 
-
-              $stock_data=DB::table('stocks')->where('medicine_code',$value->medicine_code)->first();
+               $stock = DB::table('stocks')->where('medicine_code',$value->medicine_code)->where('stock_status', 'Deactivated')->count();
 
 	             @endphp
 	              <tr>
@@ -39,7 +38,7 @@
 	                <td>{{$medicine_data->medicine_name}}</td>
 					         <td>{{$value->medicine_code}}</td>
 	                <td>{{$value->expire_date}}</td>
-	                <td>{{$stock_data->total_stock}}</td>
+	                <td>{{$stock}}</td>
 	                </tr>
 	                @endforeach
                 </tbody>

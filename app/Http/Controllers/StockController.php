@@ -14,6 +14,7 @@ class StockController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         $c_date=date('Y-m-d');
@@ -23,18 +24,47 @@ class StockController extends Controller
 
     public function out_of_stock()
     {
-        $stock_data['medicine'] = Medicine::get();
-        $stock_data['stock_data'] = Stock::join('medicines', 'medicines.medicine_code', '=', 'stocks.medicine_code')->where('stock_status', '=', 'Active')->get();
+       
+        $stock_data['Purcase'] = Purcase::distinct()->get('medicine_code');
+        $stock_data['Medicine'] = Medicine::get();
+        $stock_data['stocks_data'] = Stock::get();
         return view('Admin.stock.out_of_stock',$stock_data);
     }
 
 
     public function stock_report()
     {
-        
+        return view('Admin.stock.stock_report');
+    }
+
+    public function stockTable(Request $request)
+    {
+      $data['perPage'] = $perPage =$request->input('perPage',10);
+      $page = $request->input('page',1);
+      $data['search'] = $search = $request->search;
+      $data['sl'] =(($page-1)*$perPage)+1;
+      $sortingClick =$request->sortingClick;
+      $sorting = $request->sorting;
+      $data['sortingClick'] = $sortingClick;
+      $data['sorting'] = $sorting;
+      $sortingfield=["medicine_name","company_name"];
+      if($sorting>0)
+      {
+        $sorting=$sortingfield[$sorting-1];
+      }
+      else{
+        $sorting= "medicine_id";
+        $sortingClick = "desc";
+      }
         $data['stock_data'] = Stock::get();
-        $data['medicine_data'] = Medicine::get();
-        return view('Admin.stock.stock_report',$data);
+        $data['medicine_data'] = Medicine::when($search,function($query) use ($search){
+        $query
+        ->where('medicine_name','like',"%$search%")
+            ->orWhere('company_name','like',"%{$search}%");
+        })
+        ->orderBy($sorting, $sortingClick)
+        ->paginate($perPage);
+        return view('Admin.stock.stockTable',$data);
     }
 
     public function medicine_data()

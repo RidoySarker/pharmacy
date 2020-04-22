@@ -58,7 +58,7 @@ $(document).ready(function() {
         type    : "get",
         dataType: "html",
         success: function(data) {
-            $("#edit_form").html(data);
+            $("#editForm").html(data);
         }
     });
     $("#editModal").modal();

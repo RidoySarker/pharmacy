@@ -15,6 +15,7 @@ class PasswordController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
         return view('Admin.profile.password');

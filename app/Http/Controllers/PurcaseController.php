@@ -8,6 +8,7 @@ use App\Medicine;
 use App\Stock;
 use Illuminate\Http\Request;
 use Validator;
+use DB;
 
 class PurcaseController extends Controller
 {
@@ -53,6 +54,7 @@ class PurcaseController extends Controller
      */
     public function store(Request $request)
     {
+        DB::beginTransaction();
         $purcaseModel = new Purcase;
         $validate = Validator::make($request->all(),$purcaseModel->validation(),$purcaseModel->message());
         if($validate->fails())
@@ -89,7 +91,8 @@ class PurcaseController extends Controller
             'msgtype' => 'success',
             'message' => 'Purcase Successfully',
         ];
-        return response()->json($response , 200);      
+        return response()->json($response , 200);     
+        DB::endTransaction();
     }
 
     /**

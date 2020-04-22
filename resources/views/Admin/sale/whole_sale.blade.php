@@ -22,9 +22,9 @@
   }
   .message{
   	float: right;
-    width: 200px;
-    margin-top: -65px;
-    margin-left: 429px;
+    width: 600px;
+    margin-top: -35px;
+    margin-left: 100px;
     text-align: center;
   }
 </style>

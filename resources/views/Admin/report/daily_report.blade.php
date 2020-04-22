@@ -33,7 +33,7 @@
                 <td>{{ $value->date }}</td>
                 <td>{{ $value->invoice_id }}</td>
                 <td>{{ $value->customer_name }}</td>
-                <td id="total">{{ $value->grand_total }}</td>
+                <td >{{ $value->grand_total }}</td>
               </tr>
               @endforeach
             </tbody>

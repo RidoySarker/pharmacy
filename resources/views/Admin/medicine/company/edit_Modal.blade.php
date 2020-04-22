@@ -1,4 +1,4 @@
-<form id="edit_form" enctype="multipart/form-data" method="post">
+  @csrf
     <div class="modal-body">
       <div class="form-group">
         <input type="hidden" class="form-control" id="company_id" name="company_id" value="{{ $company->company_id }}">
@@ -27,8 +27,3 @@
         </select>
       </div>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save</button>
-    </div>
-</form>
