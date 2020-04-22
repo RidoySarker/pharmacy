@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
 	Route::get('/outstock_data', 'AdminController@outstock_data');
 	//Catagory
 	Route::resource('catagory', 'CatagoryController');
+	Route::get('catagoryData', 'CatagoryController@catagoryData');
 	Route::post('catagory/store', 'CatagoryController@store');
 	Route::post('catagory/update', 'CatagoryController@update');
 	//Profile
@@ -54,6 +55,7 @@ Route::middleware('auth')->group(function () {
 	Route::post('company/update', 'CompanyController@update');
 	//Desk
 	Route::resource('desk', 'DeskController');
+	Route::get('deskData', 'DeskController@deskData');
 	Route::post('desk/store', 'DeskController@store');
 	Route::post('desk/update', 'DeskController@update');
 	//Medicine
@@ -64,14 +66,17 @@ Route::middleware('auth')->group(function () {
 	Route::post('medicine/update', 'MedicineController@update');
 	//Customer
 	Route::resource('/customer', 'CustomerController');
+	Route::get('customerData', 'CustomerController@customerData');
 	Route::post('/customer/store', 'CustomerController@store');
 	Route::post('/customer/update', 'CustomerController@update');
 	//Expense_Catagory
 	Route::resource('/expense_catagory', 'ExpenseController');
+	Route::get('expense_catagoryData', 'ExpenseController@expense_catagoryData');
 	Route::post('/expense_catagory/store', 'ExpenseController@store');
 	Route::post('/expense_catagory/update', 'ExpenseController@update');
 	//Expense_For
 	Route::resource('/expense_for', 'ExpenseForController');
+	Route::get('expense_forData', 'ExpenseForController@expense_forData');
 	Route::post('/expense_for/store', 'ExpenseForController@store');
 	Route::post('/expense_for/update', 'ExpenseForController@update');
 	//Purcase

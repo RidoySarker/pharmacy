@@ -16,8 +16,37 @@ class CatagoryController extends Controller
      */
     public function index()
     {
-        $category = Catagory::orderBy('catagory_id', 'desc')->get();
-        return view('Admin.medicine.category.category', ['category' => $category] );
+        return view('Admin.medicine.category.category');
+    }
+
+    public function catagoryData(Request $request)
+    {
+        $data['perPage'] = $perPage =$request->input('perPage',10);
+        $page = $request->input('page',1);
+        $data['search'] = $search = $request->search;
+        $data['sl'] =(($page-1)*$perPage)+1;
+        $sortingClick =$request->sortingClick;
+        $sorting = $request->sorting;
+        $data['sortingClick'] = $sortingClick;
+        $data['sorting'] = $sorting;
+        $sortingfield=["catagory_name","catagory_description","catagory_status"];
+        if($sorting>0)
+        {
+          $sorting=$sortingfield[$sorting-1];
+        }
+        else{
+          $sorting= "catagory_id";
+          $sortingClick = "desc";
+        }
+        $data['category'] = Catagory::when($search,function($query) use ($search){
+        $query
+        ->where('catagory_name','like',"%$search%")
+            ->orWhere('catagory_description','like',"%{$search}%")
+            ->orWhere('catagory_status','like',"%{$search}%");
+        })
+        ->orderBy($sorting, $sortingClick)
+        ->paginate($perPage);
+        return view('Admin.medicine.category.list', $data);
     }
 
     /**
