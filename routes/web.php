@@ -84,8 +84,6 @@ Route::middleware('auth')->group(function () {
 	Route::get('medicine_name/{company}', 'PurcaseController@medicine_name');
 	Route::get('medicine_list/{medicine_code}', 'PurcaseController@medicine_list');
 	Route::post('purcase/store', 'PurcaseController@store');
-	Route::post('purcase/update', 'PurcaseController@update');
-	Route::get('/rest_report', 'PurcaseController@rest_report');
 	//Stock_Report
 	Route::get('stock_report', 'StockController@stock_report');
 	Route::get('stockTable', 'StockController@stockTable');
