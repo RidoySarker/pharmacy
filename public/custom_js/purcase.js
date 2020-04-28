@@ -177,7 +177,7 @@ $("#edit_form").on("submit", "#edit_form", function(e) {
         if (data.msgtype=='success') {
           toastr["success"](data.message);
           $("#editModal").modal("hide");
-          setTimeout(function(){location.reload();},900);
+          setTimeout(function(){location.reload();},0);
         } else {
           toastr["error"]("Something Went Wrong");
         }

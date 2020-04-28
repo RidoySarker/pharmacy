@@ -26,12 +26,4 @@ class Purcase extends Model
             'rest'          => 'required',
     	];
     }
-
-    public function message()
-    {
-    	return [
-
-    		'pay.required' => 'Pay is Required',
-    	];
-    }
 }

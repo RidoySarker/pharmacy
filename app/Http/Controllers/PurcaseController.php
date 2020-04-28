@@ -54,9 +54,8 @@ class PurcaseController extends Controller
      */
     public function store(Request $request)
     {
-        DB::beginTransaction();
         $purcaseModel = new Purcase;
-        $validate = Validator::make($request->all(),$purcaseModel->validation(),$purcaseModel->message());
+        $validate = Validator::make($request->all(),$purcaseModel->validation());
         if($validate->fails())
         {
             return response()->json(['error'=>$validate->errors()->all()]);
@@ -91,8 +90,7 @@ class PurcaseController extends Controller
             'msgtype' => 'success',
             'message' => 'Purcase Successfully',
         ];
-        return response()->json($response , 200);     
-        DB::endTransaction();
+        return response()->json($response , 200);
     }
 
     /**
