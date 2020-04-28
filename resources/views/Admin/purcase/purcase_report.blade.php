@@ -27,8 +27,6 @@
 	                  <th>Medicine Name</th>
 	                  <th>Quantity</th>
 	                  <th>Total</th>
-	                  <th>Pay</th>
-	                  <th>Rest</th>
 	                  <th>Action</th>
 	                </tr>
                 </thead>
@@ -39,38 +37,13 @@
 	                <td>{{ $value->company_name }}</td>
 	                <td>{{ $value->medicine_name }}</td>
 	                <td>{{ $value->quantity }}</td>
-	                <td>{{ $value->grand_total }}</td>
-	                <td>{{ $value->pay }}</td>
+	                <td>{{ $value->sub_total }}</td>
 	                <td>
-	                	@if($value->rest==0)
-	                	<font color="green">You have no rest</font>
-	                	@else
-	                	<font color="red">You have {{ $value->rest }} TK rest</font>
-	                	@endif
-	                </td>
-	                <td>
-	                	@if($value->rest==0)
-	                	<button class="btn btn-success btn-xs">No Rest</button>
-	                	@else
-	                	<button class="edit btn btn-danger btn-xs" data="{{ $value->purcase_id }}">Pay Now</button>
-	                	@endif
 	                  	<button class="delete btn btn-outline-danger btn-xs" data="{{ $value->purcase_id }}"><i class="fa fa-trash-alt"></i></button>
 	                </td>
 	              </tr>
 	              @endforeach
                 </tbody>
-                <tfoot>
-	                <tr>
-	                  <th>Date</th>
-	                  <th>Company Name</th>
-	                  <th>Medicine Name</th>
-	                  <th>Quantity</th>
-	                  <th>Total</th>
-	                  <th>Pay</th>
-	                  <th>Rest</th>
-	                  <th>Action</th>
-	                </tr>
-                </tfoot>
               </table>
             </div>
           </div>

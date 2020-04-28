@@ -8,7 +8,7 @@ class Purcase extends Model
 {
     protected $table = 'purcases';
     protected $primaryKey = 'purcase_id';
-    protected $fillable = ['date','batch_id','expire_date', 'company_name', 'medicine_code', 'quantity', 'sub_total', 'grand_total', 'pay', 'rest'];
+    protected $fillable = ['date','batch_id','expire_date', 'company_name', 'medicine_code', 'quantity', 'sub_total', 'grand_total', 'pay'];
 
     public function validation()
     {
@@ -22,8 +22,7 @@ class Purcase extends Model
             'quantity'      => 'required',
             'sub_total'     => 'required',
             'grand_total'   => 'required',
-            'pay'           => 'required',
-            'rest'          => 'required',
+            'pay'           => 'required'
     	];
     }
 }

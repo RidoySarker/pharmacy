@@ -118,12 +118,6 @@
                         </td>
                       </tr>
                       <tr>
-                        <td class="title">The Rest</td>
-                        <td>
-                          <input type="text" style="height: 40px; width: 230px;" name="rest" class="form-control rest" readonly>
-                        </td>
-                      </tr>
-                      <tr>
                         <td>
                           <input type="text" style="height: 40px; width: 230px;" name="stock_status" value="Active" class="form-control status" hidden>
                         </td>
@@ -146,7 +140,7 @@
 @stop
 @section('script')
 <script type="text/javascript">
-  
+    $(".submit").attr("disabled", true);
     var now = new Date();
     var day = ("0" + now.getDate()).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
@@ -248,12 +242,7 @@ $(document).on("keyup" , ".quantity",function(){
 $(".pay").keyup(function() {
   var pay = $(this).val();
   var grandTotal = $(".grandTotal").val();
-  var rest = parseInt(grandTotal-pay);
-  $(".rest").val(rest);
-  if(pay<0) {
-    toastr["info"]("Pay Your Bill!");
-    $(".submit").attr("disabled", true);
-  } else {
+  if(pay==grandTotal) {
     $(".submit").attr("disabled", false);
   }
 });
@@ -312,56 +301,6 @@ $(".delete").click(function() {
         } else { 
             swal("Your Data is safe!");
         }
-    });
-});
-
-$(".edit").click(function() {
-    var data = $(this).attr("data");
-
-    $.ajax({
-        url     : "/purcase/"+data+"/edit",
-        type    : "get",
-        dataType: "html",
-        success: function(data) {
-            $("#edit_form").html(data);
-            $(".submit").attr("disabled", true);
-        }
-    });
-    $("#editModal").modal();
-});
-
-$("#edit_form").on("keyup", ".now_pay", function() {
-  var now_pay = $(this).val();
-  var pay = $(".pay").val();
-  var grandTotal = $(".grandTotal").val();
-  if(now_pay<=0) {
-    $(".submit").attr("disabled", true);
-  } else {
-    var new_pay = parseInt(pay)+parseInt(now_pay);
-    var new_rest = parseInt(grandTotal)-parseInt(new_pay);
-    $(".rest").val(new_rest);
-    $(".submit").attr("disabled", false);
-  }
-});
-
-$("#edit_form").on("submit", "#edit_form", function(e) {
-  e.preventDefault();
-  var data = $(this).serializeArray();
-
-  $.ajax({
-      url     : "/purcase/update",
-      data    : data,
-      type    : "post",
-      dataType: "json",
-      success: function(data) {
-        if (data.msgtype=='success') {
-          toastr["success"](data.message);
-          $("#editModal").modal("hide");
-          setTimeout(function(){location.reload();},900);
-        } else {
-          toastr["error"]("Something Went Wrong");
-        }
-      }
     });
 });
 

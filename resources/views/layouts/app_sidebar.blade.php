@@ -75,12 +75,6 @@
                   <p>Purcase Report</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="{{ url('rest_report') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Rest Report</p>
-                </a>
-              </li>
             </ul>
           </li>
 

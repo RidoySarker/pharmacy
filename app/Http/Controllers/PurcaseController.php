@@ -73,7 +73,6 @@ class PurcaseController extends Controller
                 'sub_total'     => $request->sub_total[$i],
                 'grand_total'   => $request->grand_total,
                 'pay'           => $request->pay,
-                'rest'          => $request->rest,
             ];
             for ($a=0; $a<($request->quantity[$i]); $a++) { 
                 $stock[] =[
@@ -107,13 +106,6 @@ class PurcaseController extends Controller
         //
     }
 
-
-    public function rest_report()
-    {
-        $purcase = Purcase::join('medicines', 'medicines.medicine_code', '=', 'purcases.medicine_code')->where('rest','>',0)->get();
-        return view('Admin.purcase.rest_report', ['purcase' => $purcase]);
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -122,8 +114,7 @@ class PurcaseController extends Controller
      */
     public function edit($id)
     {
-        $purcase = Purcase::findOrFail($id);
-        return view('Admin.purcase.edit_Modal', ['purcase' => $purcase]);
+        //
     }
 
     /**
@@ -135,14 +126,7 @@ class PurcaseController extends Controller
      */
     public function update(Request $request)
     {
-        $purcase_data = Purcase::where('purcase_id', $request->purcase_id)->first();
-        $total_pay = $request->now_pay+$request->pay;
-        $purcase_data->update(['pay' => $total_pay, 'rest' => $request->rest]);
-        $response = [
-            'msgtype' => 'success',
-            'message' => 'Purcase Updated Successfully',
-        ];
-        echo json_encode($response);
+        //
     }
 
     /**
