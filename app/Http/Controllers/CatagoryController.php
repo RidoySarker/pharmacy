@@ -65,7 +65,6 @@ class CatagoryController extends Controller
      */
     public function store(Request $request)
     {
-
         $categoryModel = new Catagory;
         $validation = Validator::make($request->all(), $categoryModel->validation());
         if ($validation->fails()) {
@@ -81,26 +80,8 @@ class CatagoryController extends Controller
                 "status" => $status,
                 "data" => $categoryModel,
             ];
-
         }
         return response()->json($response, $status);
-        // $request->validate([
-        //     'catagory_name'        => 'required',
-        //     'catagory_description' => 'required',
-        //     'catagory_status'      => 'required',
-        // ]);
-        // $data = [
-        //     'catagory_name'        => $request->catagory_name,
-        //     'catagory_description' => $request->catagory_description,
-        //     'catagory_status'      => $request->catagory_status,
-        // ];
-        // Catagory::create($data);
-        // $response = [
-        //     'msgtype' => 'success',
-        //     'message' => 'Category Add Successfully',
-        // ];
-
-        //echo json_encode($response);
     }
 
     /**
